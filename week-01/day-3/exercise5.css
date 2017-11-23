@@ -1,0 +1,16 @@
+h1 {
+    color: tomato;
+}
+
+h2, h3 {
+    color: purple;
+}
+
+ol {
+    color: pink;
+}
+
+ol > li:nth-child(4) {
+    color: darkblue;
+    text-decoration: underline;
+}
