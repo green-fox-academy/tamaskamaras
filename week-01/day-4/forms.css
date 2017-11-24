@@ -46,3 +46,30 @@ p:nth-of-type(5){
     background-color: yellow;
     border: solid 14px red;
 }
+
+p:nth-of-type(6){
+    position: absolute;
+    left: 26%;
+    top: 228px;
+    width: 139px;
+    height: 42px;
+    border: solid 2px black;
+}
+
+p:nth-of-type(7){
+    position: absolute;
+    left: 37%;
+    top: 228px;
+    width: 139px;
+    height: 42px;
+    border: solid 2px black;
+}
+
+p:nth-of-type(8){
+    position: absolute;
+    left: 26%;
+    top: 311px;
+    width: 284px;
+    height: 147px;
+    border: solid 2px black;
+}
