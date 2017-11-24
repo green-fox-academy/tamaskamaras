@@ -1,0 +1,48 @@
+p:nth-of-type(1){
+    position: absolute;
+    left: 25%;
+    top: 0%;
+    width: 622px;
+    height: 785px;
+    background-color: green;
+}
+
+p:nth-of-type(2){
+    position: absolute;
+    left: 25%;
+    top: 12px;
+    width: 594px;
+    height: 19px;
+    background-color: yellow;
+    border: solid 14px red;
+}
+
+p:nth-of-type(3){
+    position: absolute;
+    left: 25%;
+    top: 71px;
+    width: 285px;
+    height: 410px;
+    background-color: yellow;
+    border: solid 14px red;
+}
+
+p:nth-of-type(4){
+    position: absolute;
+    left: 48%;
+    top: 71px;
+    width: 285px;
+    height: 410px;
+    background-color: yellow;
+    border: solid 14px red;
+}
+
+p:nth-of-type(5){
+    position: absolute;
+    left: 25%;
+    top: 522px;
+    width: 594px;
+    height: 157px;
+    background-color: yellow;
+    border: solid 14px red;
+}
