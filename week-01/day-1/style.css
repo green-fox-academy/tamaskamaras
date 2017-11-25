@@ -1,26 +1,33 @@
 nav {
     background-color: #333333;
+    height: 40px;
+    padding: 10px 100px 0 10%;
 }
 
 a {
+    float: right;
+    padding: 6px 18px 0;
     color: #ff0099;
 }
 
-ancor {
+main {
     padding: 10%;
-}
-h1 {
-    font-size: 50px;
-    font-family: 'Roboto Condensed', sans-serif;
-    text-align: center;
+    background-image: url(topography.png);
 }
 
 h1 {
-    text-align: center;
+    font-size: 50px;
+    font-family: 'Roboto Condensed', sans-serif;
+}
+
+h2 {
+    color: #ff0099;
 }
 
 h3 {
     text-align: center;
+    letter-spacing: 30px;
+    padding-left: 30px;
 }
 
 h4 {
