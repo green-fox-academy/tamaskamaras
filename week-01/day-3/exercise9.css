@@ -1,0 +1,9 @@
+p {
+    height: 70px;
+    width: 500px;
+    border: 2px solid black;
+}
+
+p:hover {
+    background-color: tomato;
+}

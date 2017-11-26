@@ -1,0 +1,23 @@
+div {
+    border: 2px solid skyblue;
+    height: 90px;
+    width: 750px;
+    margin: 20px;
+    padding: 0 0 0 10px;
+}
+
+div:last-child {
+    background-color: tomato;
+}
+
+p {
+    background-color: skyblue;
+    height: 50px;
+    width: 50px;
+    display: inline-block;
+    margin: 20px 10px;
+}
+
+div:last-child > p {
+    background-color: purple;
+}
