@@ -10,3 +10,11 @@ div {
     padding-top: 30px;
     display: inline-block;
 }
+
+div:first-child {
+    background-color: purple;
+}
+
+div:last-child {
+    background-color: yellow
+}
