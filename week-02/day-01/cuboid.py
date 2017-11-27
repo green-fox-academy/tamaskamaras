@@ -3,3 +3,10 @@
 # 
 # Surface Area: 600
 # Volume: 1000
+
+width = 3
+length = 3
+height = 3
+
+print("Surface Area:", width * length * 6)
+print("Volume:", width * length * height)
