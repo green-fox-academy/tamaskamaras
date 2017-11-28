@@ -7,3 +7,8 @@
 # ****
 #
 # The triangle should have as many lines as the number was
+
+a = int(input())
+
+for i in range(0, a + 1):
+    print("*" * i)

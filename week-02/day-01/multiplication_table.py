@@ -13,3 +13,8 @@
 # 8 * 15 = 120
 # 9 * 15 = 135
 # 10 * 15 = 150
+
+a = int(input("Give me a whole number! "))
+
+for i in range(1, 16):
+    print(i, "*", a, i * a)
