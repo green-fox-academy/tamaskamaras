@@ -16,5 +16,5 @@ students = [
 
 def candy_number(students):
     result = []
-    for i in students:
+    for v in students:
         result.append()
