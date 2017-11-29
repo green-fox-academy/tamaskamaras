@@ -13,8 +13,4 @@ def matchmaking(g, b):
         x += 2
     return(order)
 
-    # for b in boys:
-    #     order = order + [b]
-
-
 print(matchmaking(girls, boys))
