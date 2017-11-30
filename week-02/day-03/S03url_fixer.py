@@ -3,6 +3,6 @@
 
 url = "https//www.reddit.com/r/nevertellmethebots"
 
-url = url[:5] + ":" + url[5:-4] + "odds
+url = url[:5] + ":" + url[5:-4] + "odds"
 
 print(url)
