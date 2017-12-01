@@ -15,15 +15,18 @@ accounts = [
 #
 # Print "404 - account not found" if any of the account numbers don't exist
 
-def name_balance(acc_num):
-    result1 = ""
-    result2 = 0.0
-    for acc in accounts:
-        if acc['account_number'] == acc_num:
-            result1 += acc['client_name']
-            result2 += acc['balance']
-    return result1, result2
+def transfer(sender, beneficiary, amount):
+    for client in accounts:
+        if client['account_number'] is sender:
+            client['balance'] -= amount
+        elif client['account_number'] is beneficiary:
+            client['balance'] += amount
+        elif client['account_number'] == sender:
+            dismatch = True
+            if dismatch != True:
+                print("404 - account not found")
+    return amount
 
-a = int(input("Type the account number: "))
-
-print("Name and balance: ", name_balance(a))
+transfer(11234543, 23456311, 203004099)
+for cl in accounts:
+    print(cl)
