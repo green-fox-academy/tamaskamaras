@@ -4,15 +4,33 @@
 
 list_of_numbers = [2, 4, 6, 8, 10, 12, 14, 16]
 
-input_numbers = [4, 8, 12, 16]
+inputn = [4, 8, 12, 16]
+
+temp = []
+for num in inputn:
+    for stack in list_of_numbers:
+        if num == stack:
+            temp.append(True)
+if len(temp) == len(inputn):
+    print(True)
+else:
+    print(False)
+
+
+
+#############################
 
 def match_checker(list_of_numbers):
-    for num in input_numbers:
+    temp = []
+    result = ""
+    for num in inputn:
         for stack in list_of_numbers:
             if num == stack:
-                result = True
-            else:
-                result = False
+                temp.append(True)
+                if len(temp) == len(inputn):
+                    result == True
+                else:
+                    result == False
     return result
 
 print(match_checker(list_of_numbers))
