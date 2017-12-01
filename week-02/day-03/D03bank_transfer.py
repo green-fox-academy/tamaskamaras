@@ -24,6 +24,4 @@ def name_balance(acc_num):
             result2 += acc['balance']
     return result1, result2
 
-a = int(input("Type the account number: "))
-
-print("Name and balance: ", name_balance(a))
+print("Name and balance: ", name_balance(int(input("Type the account number: "))))
