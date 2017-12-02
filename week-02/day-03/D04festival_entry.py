@@ -1,7 +1,4 @@
-
 watchlist = []
-
-
 
 queue = [
 	{ 'name': 'Amanda', 'alcohol': 10, 'guns': 1 },
@@ -33,12 +30,11 @@ def security_check(queue):
 		if goers['alcohol'] > 0:
 			security_alcohol_loot += goers['alcohol']
 			goers['alcohol'] = [0]
+	print("Confiscated alcohol: ", security_alcohol_loot)
+	return admitteds, security_alcohol_loot
 
-security_check(queue)
 print("Admitted festivalgoers: ", security_check(queue))
-
+print("Watchlist: ", watchlist)
+print("Final queue: ")
 for dics in queue:
 	print(dics)
-
-print("Confiscated alcohol: ", security_alcohol_loot)
-print("Watchlist: ", watchlist)
