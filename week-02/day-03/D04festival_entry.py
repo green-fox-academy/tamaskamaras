@@ -1,7 +1,7 @@
 
 watchlist = []
 
-security_alcohol_loot = 0
+
 
 queue = [
 	{ 'name': 'Amanda', 'alcohol': 10, 'guns': 1 },
@@ -22,7 +22,23 @@ queue = [
 # If guns are found, remove them and put them on the watchlist (only the names)
 # If alcohol is found confiscate it (set it to zero and add it to security_alchol_loot) and let them enter the festival
 
-admitteds = []
+def security_check(queue):
+	admitteds = []
+	security_alcohol_loot = 0
+	for goers in queue:
+		if goers['guns'] > 0:
+			watchlist.append(goers['name'])
+		if goers['guns'] == 0:
+			admitteds.append(goers['name'])
+		if goers['alcohol'] > 0:
+			security_alcohol_loot += goers['alcohol']
+			goers['alcohol'] = [0]
 
-for goers in queue:
-    admitteds.append(goers['name'])
+security_check(queue)
+print("Admitted festivalgoers: ", security_check(queue))
+
+for dics in queue:
+	print(dics)
+
+print("Confiscated alcohol: ", security_alcohol_loot)
+print("Watchlist: ", watchlist)
