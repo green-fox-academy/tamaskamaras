@@ -13,8 +13,9 @@ def match_checker(list_of_numbers):
             if num == stack:
                 temp.append(True)
     if len(temp) == len(inputn):
-        return True
+        result = True
     else:
-        return False
+        result = False
+    return result
 
 print(match_checker(list_of_numbers))
