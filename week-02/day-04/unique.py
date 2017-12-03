@@ -4,7 +4,6 @@
 # input: [1, 11, 34, 11, 52, 61, 1, 34]
 # output: [1, 11, 34, 52, 61]
 
-input = [1, 11, 34, 11, 52, 61, 1, 34]
 
 def unique(input):
     output = []
@@ -12,5 +11,7 @@ def unique(input):
         if number not in output:
             output.append(number)
     return output
+
+input = [1, 11, 34, 11, 52, 61, 1, 34]
 
 print(unique(input))
