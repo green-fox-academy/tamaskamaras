@@ -6,9 +6,11 @@
 
 input = [1, 11, 34, 11, 52, 61, 1, 34]
 
-for i in range(len(input) - 1):
-    for n in input:
-        for x in range(len(input) - 1):
-            if n == input[i + (x + 1)]:
-                input[i + (x + 1)] = []
-print(input)
+def unique(input):
+    output = []
+    for number in input:
+        if number not in output:
+            output.append(number)
+    return output
+
+print(unique(input))
