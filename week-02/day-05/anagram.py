@@ -8,4 +8,4 @@ def anagram (a, b):
         output = False
     return output
 
-print(anagram("asdf", "fdsa"))
+print(anagram(str(input("Type a word: ")), str(input("Type an anagram: "))))
