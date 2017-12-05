@@ -6,7 +6,7 @@ def decrypt(file_name):
     for line in dupli:
         newline = ""
         for i in range(len(line) - 1):
-            if line[i] != line[i + 1]:
+            if i % 2 != 0:
                 newline += line[i]
         newline += "\n"
         simplified_chars = open("simplified_chars.txt", "a")
@@ -15,22 +15,3 @@ def decrypt(file_name):
     simplified_chars.close()
 
 decrypt("duplicated-chars.txt")
-
-###########################
-
-
-# line = "TThhee  ZZeenn  ooff  PPyytthhoonn"
-# new = ""
-
-# for i in range(len(line) - 1):
-#     if line[i] != line[i + 1]:
-#         new += line[i]
-
-# print(new)
-
-
-# ##########################
-
-# duplicatedchars = open("duplicated-chars.txt", "r")
-# lines = duplicatedchars.readlines()
-# print(lines)
