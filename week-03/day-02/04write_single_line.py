@@ -6,5 +6,6 @@
 try:
     openfile = open("my-file1.txt", "r")
     openfile.write("Tamas Kamaras")
+    openfile.close()
 except:
     print("Unable to write file: my-file1.txt")

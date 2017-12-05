@@ -11,6 +11,7 @@ def multilines(path, word, number):
     try:
         created = open(path, "w")
         created.write(word * number)
+        created.close()
     except:
         print("")
 

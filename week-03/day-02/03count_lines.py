@@ -10,6 +10,7 @@ def count_lines(filename):
         for line in lines:
             sum += 1
         return sum
+        lines.close()
     except FileNotFoundError:
         return 0
         

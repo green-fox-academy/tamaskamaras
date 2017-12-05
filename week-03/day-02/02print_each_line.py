@@ -6,5 +6,6 @@
 try:
     my_file = open("my-file.txt", "r")
     print("my-file.txt")
+    my_file.close()
 except FileNotFoundError:
     print("Unable to read file: my-file.txt")
