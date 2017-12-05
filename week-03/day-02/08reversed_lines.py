@@ -10,5 +10,7 @@ def decrypt(file_name):
         newline += "\n"
         simple = open("simple_lines.txt", "a")
         simple.write(newline)
+    reverse.close()
+    simple.close()
 
 decrypt("reversed-lines.txt")
