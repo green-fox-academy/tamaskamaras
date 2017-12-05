@@ -3,10 +3,10 @@
 # It should return zero if it can't open the file, and
 # should not raise any error.
 
-def count_lines(filenames):
+def count_lines(filename):
     try:
         sum = 0
-        lines = open(filenames, "r")
+        lines = open(filename, "r")
         for line in lines:
             sum += 1
         return sum
