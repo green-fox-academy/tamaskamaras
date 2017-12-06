@@ -13,10 +13,10 @@ my_canvas.pack()
 def square_drawing (size, color):
     rainbow = ['red', 'yellow', 'pink', 'green', 'purple', 'orange', 'blue']
     basis = 150 - (size / 2)
-    unit = basis / 7
+    unit = basis / 6
     for i in range(6):
         box = my_canvas.create_rectangle(0 + (i * unit), 0 + (i * unit), 300 - (i * unit), 300 - (i * unit), fill = rainbow[i])
 
     centerbox = my_canvas.create_rectangle(150 - (size / 2), 150 - (size / 2), 150 + (size / 2), 150 + (size / 2), fill = color)
-square_drawing(200, 'black')
+square_drawing(100, 'black')
 my_root.mainloop()
