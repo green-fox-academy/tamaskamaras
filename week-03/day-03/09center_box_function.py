@@ -11,7 +11,7 @@ my_canvas = Canvas(my_root, width = '300', height = '300')
 my_canvas.pack()
 
 def square_drawing (size):
-    box = my_canvas.create_rectangle((150 - (size / 2)), (150 - (size / 2)), (150 + (size / 2)), (150 + (size / 2)))
+    box = my_canvas.create_rectangle(150 - (size / 2), 150 - (size / 2), 150 + (size / 2), 150 + (size / 2))
 
 square_drawing(250)
 my_root.mainloop()
