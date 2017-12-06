@@ -7,19 +7,21 @@ my_canvas = Canvas(my_root, width = '300', height = '300')
 my_canvas.pack()
 
 def steps_3d (iteration):
-    step = 10
-    start_x = ''
-    start_y = ''
-    end_x = ''
-    end_y = ''
-    for i in range(1, iteration):
+    size = 10
+    start_x_y = 10
+    end_x_y = start_x_y + size
+    for i in range(iteration):
         box = my_canvas.create_rectangle(
-            (i * step) + (i * step),
-            (i * step) + (i * step),
-            step + (i * step),
-            step + (i * step),
-            fill = 'purple')
-
-steps_3d(7)
+            start_x_y,
+            start_x_y,
+            end_x_y,
+            end_x_y,
+            fill = 'purple'
+            )
+        start_x_y += size
+        size += 10      
+        end_x_y += size
+            
+steps_3d(6)
 
 my_root.mainloop()
