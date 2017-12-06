@@ -8,14 +8,17 @@ my_canvas.pack()
 
 def checkerboard (iteration):
     size =  20
-    for x in range(1, iteration + 1):    
+    for y in range(1, iteration + 1):    
         for i in range(1, iteration + 1):
-            box = my_canvas.create_rectangle(
-                i * size,
-                x * size,
-                (i * size) + size,
-                2 * size
-            )
+            if (i + y) % 2 == 0:
+                color = 'black'
+                box = my_canvas.create_rectangle(
+                    i * size,
+                    y * size,
+                    (i * size) + size,
+                    (y * size) + size,
+                    fill = color
+                )
 
 checkerboard(5)
 
