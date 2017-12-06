@@ -12,15 +12,15 @@ canvas.pack()
 
 def center_line ():
     for a in range(0, 300, 20):
-        x = a
-        y = 0
-        line = canvas.create_line(
-            x,
-            y,
-            150,
-            150
-        )
-
+        for b in range(0, 300, 20):
+            x = a
+            y = b
+            line = canvas.create_line(
+                x,
+                y,
+                150,
+                150
+            )
 
 center_line()
 
