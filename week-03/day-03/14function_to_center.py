@@ -10,21 +10,22 @@ root = Tk()
 canvas = Canvas(root, width='300', height='300')
 canvas.pack()
 
-def center_line ():
-    for a in range(0, 300, 20):
-        for b in range(0, 300, 20):
+def center_line():
+    for a in range(0, 320, 20):
+        for b in range(0, 320, 20):
             if a == 0:
                 x = a
                 y = b
             if a > 0:
                 x = a
                 y = 0
-            line = canvas.create_line(
-                x,
-                y,
-                150,
-                150
-            )
+            if b == 300:
+                x = a
+                y = b
+            if a == 300:
+                x = a
+                y = b
+            line = canvas.create_line(x, y, 150, 150)
 
 center_line()
 
