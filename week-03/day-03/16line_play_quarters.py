@@ -1,27 +1,24 @@
+
 from tkinter import *
 
-root = Tk()
 
-canvas = Canvas(root, width='600', height='600')
-canvas.pack()
+def draw(size):
 
-def line_play(sv, sh, ev, eh):
-    for v in range(sv, ev, 20):
-        for h in range(sv, ev, 20):
-            if v == sv:
-                sx = v
-                sy = h
-                ex = h
-                ey = ev - 20
-            line = canvas.create_line(sx, sy, ex, ey, fill = 'purple')
-            if h == sv:
-                sx = ev - 20
-                sy = v
-                ex = v
-                ey = sv
-            line = canvas.create_line(sx, sy, ex, ey, fill = 'green')
+    root = Tk()
+    canvas = Canvas(root, width = size, height = size)
+    canvas.pack()
+    lsize = size // 2
 
-line_play(0, 0, 320, 320)
-line_play(300, 300, 620, 620)
+    for i in range(0, lsize, 10):
+        line = canvas.create_line(0, i, i, lsize, fill = 'green')
+        line = canvas.create_line(i, 0, lsize, i, fill = 'purple')
+        line = canvas.create_line(lsize, i, i + lsize, lsize, fill = 'green')
+        line = canvas.create_line(i + lsize, 0, size, i, fill = 'purple')
+        line = canvas.create_line(0, i + lsize, i, size, fill = 'green')
+        line = canvas.create_line(i, lsize, lsize, i + lsize, fill = 'purple')
+        line = canvas.create_line(lsize, i + lsize, i + lsize, size, fill = 'green')
+        line = canvas.create_line(i + lsize, lsize, size, i + lsize, fill = 'purple')
+        
+    root.mainloop()
 
-root.mainloop()
+draw(600)
