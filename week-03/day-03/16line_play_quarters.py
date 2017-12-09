@@ -1,7 +1,6 @@
 
 from tkinter import *
 
-
 def draw(size):
 
     root = Tk()
