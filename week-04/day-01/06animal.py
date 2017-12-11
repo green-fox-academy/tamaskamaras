@@ -16,7 +16,7 @@ class Animal():
         self.thirst += 1
 
     def __str__(self):
-        return ('{} Hungar: {}, Thirst: {}.'.format(animal1.name, animal1.hunger, animal1.thirst))
+        return ('{}\'s hungar: {}, thirst: {}.'.format(self.name, self.hunger, self.thirst))
 
 animal1 = Animal('Bloki')
 animal1.eat()
