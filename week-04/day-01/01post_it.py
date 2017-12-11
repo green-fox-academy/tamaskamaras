@@ -1,4 +1,4 @@
-class PostIt:
+class PostIt(object):
 
     background_color = ''
     text = ''
