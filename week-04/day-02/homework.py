@@ -12,7 +12,7 @@ class Person():
         print('My goal is: Live for the moment!')
     
     def __str__(self):
-        return ('{}{}{}'.format(self.name, self.age, self.gender))
+        return '{}{}{}'.format(self.name, self.age, self.gender)
 
 class Student():
 
@@ -33,7 +33,7 @@ class Student():
         self.skipped_days += number_of_days
     
     def __str__(self):
-        return ('{}{}{}{}'.format(self.name, self.age, self.gender, self.previous_organization))
+        return '{}{}{}{}'.format(self.name, self.age, self.gender, self.previous_organization)
 
 class Mentor():
 

@@ -71,28 +71,6 @@ class PallidaClass(object):
     def info(self):
         print('Pallida {} class has {} students and {} mentors'.format(self.class_name, len(self.students), len(self.mentors))) 
 
-# person1 = Person()
-# person1.introduce()
-# person1.get_goal()
-
-# student1 = Student()
-# student1.introduce()
-# student1.get_goal()
-
-# mentor1 = Mentor()
-# mentor1.introduce()
-# mentor1.get_goal()
-
-# sponsor1 = Sponsor()
-# sponsor1.hire()
-# sponsor1.introduce()
-# sponsor1.get_goal()
-
-# pallida1 = PallidaClass('Cool')
-# pallida1.add_student(student1)
-# pallida1.add_mentor(mentor1)
-# pallida1.info()
-
 people = []
 
 mark = Person('Mark', 46, 'male')
