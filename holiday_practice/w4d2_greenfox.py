@@ -53,7 +53,8 @@ class PallidaClass(object):
         self.mentors = mentors
 
     def add_student(self, student):
-        self.students.append(student)
+        if isinstance(student, Student):
+            self.students.append(student)
     
     def add_mentor(self, mentor):
         self.mentors.append(mentor)
