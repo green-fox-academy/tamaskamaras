@@ -39,15 +39,22 @@ class CandyShop(object):
     def raise_prices(self, percentage):
         self.usd_candy *= (1 + percentage / 100)
         self.usd_lollipop *= (1 + percentage / 100)
-        print(self.usd_candy)
-        print(self.usd_lollipop)
     
     def sell(self, sweet, amount):
-        pass
-    
+        if sweet == 'candy' and self.candies >= amount:
+            self.candies -= amount
+            self.income += self.usd_candy
+        elif sweet == 'lollipop' and self.lollipops >= amount:
+            self.lollipops -= amount
+            self.income += self.usd_lollipop
+        else:
+            print('You can\'t sell sweet')
+
     def buy_sugar(self, amount):
         pass
-
+    
+    def __str__(self):
+        return ('Inventory: {} candies, {} lollipops, Income: {}, Sugar: {} gr' .format(self.candies, self.lollipops, self.income, self.sugar_gr))
 
 candy_shop = CandyShop(300)
 candy_shop.create_sweets("candy")
