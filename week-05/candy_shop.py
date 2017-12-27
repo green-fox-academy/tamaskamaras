@@ -23,17 +23,24 @@ class CandyShop(object):
         self.income = 0
         self.candies = 0
         self.lollipops = 0
+        self.usd_candy = 20
+        self.usd_lollipop = 10
     
     def create_sweets(self, sweet):
         if sweet == 'candy':
             self.candies += 1
+            self.sugar_gr -= 10
         elif sweet == 'lollipop':
             self.lollipops += 1
+            self.sugar_gr -= 5
         else:
             print('This candy is not stored in our shop.')
-    
+
     def raise_prices(self, percentage):
-        pass
+        self.usd_candy *= (1 + percentage / 100)
+        self.usd_lollipop *= (1 + percentage / 100)
+        print(self.usd_candy)
+        print(self.usd_lollipop)
     
     def sell(self, sweet, amount):
         pass
