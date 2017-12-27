@@ -51,10 +51,12 @@ class CandyShop(object):
             print('You can\'t sell sweet')
 
     def buy_sugar(self, amount):
-        pass
+        self.sugar_gr += amount
+        self.income -= amount / 10
     
     def __str__(self):
-        return ('Inventory: {} candies, {} lollipops, Income: {}, Sugar: {} gr' .format(self.candies, self.lollipops, self.income, self.sugar_gr))
+        return ('Inventory: {} candies, {} lollipops, Income: {}, Sugar: {} gr' 
+        .format(self.candies, self.lollipops, self.income, self.sugar_gr))
 
 candy_shop = CandyShop(300)
 candy_shop.create_sweets("candy")
