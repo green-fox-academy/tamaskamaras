@@ -1,9 +1,9 @@
-class Animal():
+class Animal(object):
 
     def __init__(self, name):
         self.name = name
-        self.hunger = 50
-        self.thirst = 50
+        self.hunger = int(50)
+        self.thirst = int(50)
     
     def eat(self):
         self.hunger -= 1
