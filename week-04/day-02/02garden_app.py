@@ -1,6 +1,6 @@
 class Garden(object):
 
-    def __init__(self, color, water_amount = 0, water_absorbtion = 0):
+    def __init__(self, color, water_amount, water_absorbtion):
         self.color = color
         self.water_amount = water_amount
         self.water_absorbtion = water_absorbtion
@@ -10,9 +10,8 @@ class Garden(object):
     
 class Flowers(Garden):
 
-    def __init__(self, color, water_amount = 0, water_absorbtion = 0.75):
-        super().__init__(color, water_amount = 0, water_absorbtion = 0)
-        self.water_absorbtion = water_absorbtion
+    def __init__(self, color):
+        super().__init__(color, 0, 0.75)
 
     def show(self):
         if self.water_amount < 5:
@@ -25,9 +24,8 @@ class Flowers(Garden):
 
 class Trees(Garden):
 
-    def __init__(self, color, water_amount = 0, water_absorbtion = 0.4):
-        super().__init__(color, water_amount = 0, water_absorbtion = 0)
-        self.water_absorbtion = water_absorbtion
+    def __init__(self, color):
+        super().__init__(color, 0, 0.4)
     
     def show(self):
         if self.water_amount < 10:
