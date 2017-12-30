@@ -8,5 +8,6 @@ class Sharpie(object):
     def use(self):
         self.ink_amount -= 10
 
-sharpie = Sharpie('red', 1.1)
-sharpie.use()
+sharpie1 = Sharpie('red', 1.1)
+sharpie1.use()
+sharpie2 = Sharpie('yellow', 1.2)
