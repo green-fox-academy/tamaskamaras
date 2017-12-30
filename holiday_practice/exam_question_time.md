@@ -19,17 +19,23 @@ class Car(object):
         self.type = type
 
 car1 = Car('Ford')
+
 car2 = Car('Toyota')
+
 car3 = Car('Trabant')
+
 print(car1.number_of_wheels)
 
 #### Instance variable:
 
 class Vehicle(object):
+
     def __init__(self, type, wheels):
         self.type = type
         self.wheels = wheels
 
 vehicle1 = Vehicle('Car', 4)
+
 vehicle2 = Vehicle('Bicycle', 2)
+
 vehicle3 = Vehicle('Ship', 0)
