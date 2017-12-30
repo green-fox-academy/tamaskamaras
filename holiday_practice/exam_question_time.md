@@ -26,7 +26,7 @@ print(car1.number_of_wheels)
 #### Instance variable:
 
 class Vehicle(object):
-    def __init__(self, type, wheels):
+    def __init_ _(self, type, wheels):
         self.type = type
         self.wheels = wheels
 
