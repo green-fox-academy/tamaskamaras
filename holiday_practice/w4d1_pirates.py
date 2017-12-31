@@ -1,7 +1,8 @@
 import random
 
 class Pirate(object):
-    def __init__(self):
+    def __init__(self, name):
+        self.name = name
         self.state = 'Awake'
         self.drinks = 0
         self.parrot = 'Parrot'
@@ -37,3 +38,26 @@ class Pirate(object):
                 enemy.state = 'Dead'
         else:
             return 'Your enemy is already dead!'
+
+class Captain(Pirate):
+    pass
+
+class Ship(object):
+    def __init__(self):
+        self.pirates = []
+
+    def fill_ship(self):
+        captain = Captain('Captain')
+        self.pirates.append(captain)
+        for i in range(1, random.randint(2, 20)):
+            name = 'Pirate' + str(i)
+            pirate = Pirate(name)
+            self.pirates.append(pirate)
+
+ship = Ship()
+ship.fill_ship()
+
+
+# for item in ship.pirates:
+#     print(item.name)
+

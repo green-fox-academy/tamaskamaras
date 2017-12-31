@@ -4,8 +4,8 @@ from w4d1_pirates import Pirate
 class TestPirates(unittest.TestCase):
 
     def setUp(self):
-        self.object = Pirate()
-        self.enemy_pirate = Pirate()
+        self.object = Pirate('Pirate1')
+        self.enemy_pirate = Pirate('Pirate2')
 
     def test_drinks(self):
         self.object.drink_sum_rum()
