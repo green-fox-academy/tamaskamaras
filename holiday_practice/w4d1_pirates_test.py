@@ -1,11 +1,13 @@
 import unittest
-from w4d1_pirates import Pirate
+from w4d1_pirates import *
 
 class TestPirates(unittest.TestCase):
 
     def setUp(self):
         self.object = Pirate('Pirate1')
         self.enemy_pirate = Pirate('Pirate2')
+        self.ship1 = Ship()
+        self.ship2 = Ship()
 
     def test_drinks(self):
         self.object.drink_sum_rum()
@@ -46,13 +48,13 @@ class TestPirates(unittest.TestCase):
         self.object.die()
         self.assertEqual(self.object.state, 'Dead')
     
-    def test_brawl_self(self):
-        self.object.brawl(self.enemy_pirate)
-        self.assertEqual(self.object.state, 'Awake')
+    # def test_brawl_self(self):
+    #     self.object.brawl(self.enemy_pirate)
+    #     self.assertEqual(self.object.state, 'Awake')
 
-    def test_brawl_enemy(self):
-        self.object.brawl(self.enemy_pirate)
-        self.assertEqual(self.enemy_pirate.state, 'Dead')
-
+    # def test_brawl_enemy(self):
+    #     self.object.brawl(self.enemy_pirate)
+    #     self.assertEqual(self.enemy_pirate.state, 'Dead')
+    
 if __name__ == '__main__':
     unittest.main()

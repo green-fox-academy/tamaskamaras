@@ -54,6 +54,31 @@ class Ship(object):
             pirate = Pirate(name)
             self.pirates.append(pirate)
 
+    def calc_score(self):
+        return len(self.pirates) - self.captain.drinks
+
+    def battle(self, enemy_ship):
+        self.enemy = enemy_ship
+        if self.calc_score() > self.enemy.calc_score():
+            self.result = True 
+            i = random.randint(1, len(self.enemy.pirates) - 1)
+            del self.enemy.pirates[i:]
+            return True
+        self.result = False
+        i = random.randint(1, len(self.pirates) - 1)
+        del self.pirates[i:]
+        return False
+    
+    def party(self):
+        if self.result:
+            for pirate in self.pirates:
+                for i in range(1, random.randint(1, len(self.pirates))):
+                    pirate.drink_sum_rum()
+        else:
+          for pirate in self.enemy.pirates:
+                for i in range(1, random.randint(1, len(self.enemy.pirates))):
+                    pirate.drink_sum_rum()
+  
     def __str__(self):
         sum = 0
         for indiv in self.pirates:
@@ -64,10 +89,12 @@ class Ship(object):
             'There are ' + str(sum) + ' live pirates on board.'
         )
 
-ship = Ship()
-ship.fill_ship()
-print(ship)
+ship1 = Ship()
+ship1.fill_ship()
 
-# for item in ship.pirates:
-#     print(item.name)
+ship2 = Ship()
+ship2.fill_ship()
 
+ship2.battle(ship1)
+
+ship2.party()
