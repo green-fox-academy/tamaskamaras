@@ -47,16 +47,26 @@ class Ship(object):
         self.pirates = []
 
     def fill_ship(self):
-        captain = Captain('Captain')
-        self.pirates.append(captain)
+        self.captain = Captain('Captain')
+        self.pirates.append(self.captain)
         for i in range(1, random.randint(2, 20)):
             name = 'Pirate' + str(i)
             pirate = Pirate(name)
             self.pirates.append(pirate)
 
+    def __str__(self):
+        sum = 0
+        for indiv in self.pirates:
+            if indiv.state == 'Awake':
+                sum += 1
+        return (
+            'Captain is ' + self.captain.state.lower() + ' and consumed ' + str(self.captain.drinks) + ' rum.\n'
+            'There are ' + str(sum) + ' live pirates on board.'
+        )
+
 ship = Ship()
 ship.fill_ship()
-
+print(ship)
 
 # for item in ship.pirates:
 #     print(item.name)
