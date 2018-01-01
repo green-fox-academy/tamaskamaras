@@ -15,5 +15,8 @@ class TestCarrier(unittest.TestCase):
         self.f16.refill(300)
         self.assertEqual(self.f16.ammo, 8)
 
+    def test_get_type(self):
+        self.assertEqual(self.f16.get_type(), 'F16')
+
 if __name__ == '__main__':
     unittest.main()
