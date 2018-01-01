@@ -17,6 +17,14 @@ class TestCarrier(unittest.TestCase):
 
     def test_get_type(self):
         self.assertEqual(self.f16.get_type(), 'F16')
+    
+    def test_str(self):
+        self.assertEqual(self.f16.__str__(), 'Type F16, Ammo: 0, Base damage: 30, All damage: 0')
+
+    def test_all_damage(self):
+        self.f16.refill(8)
+        self.f16.fight()
+        self.assertEqual(self.f16.__str__(), 'Type F16, Ammo: 0, Base damage: 30, All damage: 240')
 
 if __name__ == '__main__':
     unittest.main()
