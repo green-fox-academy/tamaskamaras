@@ -4,7 +4,7 @@ from w4d2_carrier import *
 class TestCarrier(unittest.TestCase):
     def setUp(self):
         self.f16 = F16()
-        self.carrier = Carrier(1000, 100)
+        self.carrier = Carrier(60, 100)
     
     def test_damage(self):
         self.assertEqual(self.f16.fight(), 0)
@@ -30,6 +30,36 @@ class TestCarrier(unittest.TestCase):
     def test_add_aircraft(self):
         self.carrier.add_aircraft('F35')
         self.assertEqual(len(self.carrier.aircrafts), 1)
+    
+    def test_fill_1(self):
+        self.carrier.add_aircraft('F35')
+        self.carrier.fill()
+        self.assertEqual(self.carrier.ammo_store, 48)
+
+    def test_fill_2(self):
+        self.carrier.add_aircraft('F35')
+        self.carrier.fill()
+        self.assertEqual(self.carrier.aircrafts[0].ammo, 12)
+
+    def test_fill_multiple1(self):
+        self.carrier.add_aircraft('F16')
+        self.carrier.add_aircraft('F35')
+        self.carrier.add_aircraft('F16')
+        self.carrier.add_aircraft('F16')
+        self.carrier.add_aircraft('F35')
+        self.carrier.add_aircraft('F35')
+        self.carrier.fill()
+        self.assertEqual(self.carrier.ammo_store, 0)
+
+    def test_fill_multiple2(self):
+        self.carrier.add_aircraft('F16')
+        self.carrier.add_aircraft('F35')
+        self.carrier.add_aircraft('F16')
+        self.carrier.add_aircraft('F16')
+        self.carrier.add_aircraft('F35')
+        self.carrier.add_aircraft('F35')
+        self.carrier.fill()
+        self.assertEqual(self.carrier.aircrafts[-1].ammo, 12)
 
 if __name__ == '__main__':
     unittest.main()
