@@ -8,6 +8,11 @@ class Aircraft(object):
         damage = self.ammo * self.base_damage
         self.ammo = 0
         return damage
+    
+    def refill(self, amount):
+        remaining = amount - (self.max_ammo - self.ammo)
+        self.ammo += amount - remaining
+        return remaining
 
 class F16(Aircraft):
     def __init__(self):
