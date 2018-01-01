@@ -43,3 +43,20 @@ class Carrier(object):
         elif type == 'F35':
             fighter = F35()
         self.aircrafts.append(fighter)
+
+    def sort_aircrafts(self, filltype):
+        for aircraft in self.aircrafts:
+            if aircraft.type == filltype and self.ammo_store > 0:
+                remaining = aircraft.refill(self.ammo_store)
+                filled_ammo = self.ammo_store - remaining
+                self.ammo_store -= filled_ammo
+
+    def fill(self):
+            if self.ammo_store > 0:
+                self.sort_aircrafts('F35')
+                self.sort_aircrafts('F16')
+            try:
+                if self.ammo_store <= 0:
+                    self.ammo_store += ''
+            except TypeError:
+                print('Ammo store has to be bigger than 0')
