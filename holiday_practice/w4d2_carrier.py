@@ -30,3 +30,16 @@ class F16(Aircraft):
 class F35(Aircraft):
     def __init__(self):
         super().__init__(0, 12, 50, 'F35', 0)
+
+class Carrier(object):
+    def __init__(self, ammo, hp):
+        self.ammo_store = ammo
+        self.hp = hp
+        self.aircrafts = []
+    
+    def add_aircraft(self, type):
+        if type == 'F16':
+            fighter = F16()
+        elif type == 'F35':
+            fighter = F35()
+        self.aircrafts.append(fighter)
