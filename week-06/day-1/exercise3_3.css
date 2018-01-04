@@ -1,0 +1,17 @@
+.container {
+    display: flex;
+    max-width: 100%;
+    height: 300px;
+    background: yellow;
+    align-items: flex-end;
+    justify-content: flex-end;
+    padding: 0px;
+}
+
+.item {
+    min-width: 100px;
+    height: 100px;
+    background: purple;
+    list-style: none;
+    margin-left: 10px;
+}

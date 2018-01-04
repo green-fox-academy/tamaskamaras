@@ -1,0 +1,15 @@
+main {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    max-width: 600px;
+    height: 200px;
+    background: yellow;
+}
+
+div {
+    width: 100px;
+    height: 100px;
+    background: purple;
+    position: absolute;    
+}

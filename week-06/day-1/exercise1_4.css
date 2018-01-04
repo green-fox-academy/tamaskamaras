@@ -1,0 +1,23 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    max-width: 400px;
+}
+
+.item {
+    height: 100px;
+    width: 100%
+}
+
+.green {
+    background: green;
+}
+
+.purple {
+    background: purple;
+}
+
+.yellow {
+    height: 200px;
+    background: yellow;
+}
