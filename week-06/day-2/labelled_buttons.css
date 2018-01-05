@@ -1,0 +1,39 @@
+body {
+    display: flex;
+    background: rgb(46, 45, 45);
+    justify-content: center;
+    align-items: center;
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+}
+
+p {
+    display: flex;
+    flex-direction: row;
+}
+
+div {
+    display: flex;
+    width: 30px;
+    height: 30px;
+    margin: 15px;
+    background: brown;
+    border-radius: 2px;
+    justify-content: center;
+    align-items: center;
+}
+
+img {
+    width: 20px;
+    height: 20px;
+    color: white;
+}
+
+article {
+    width: 100px;
+    height: 30px;
+    background: orangered;
+}
