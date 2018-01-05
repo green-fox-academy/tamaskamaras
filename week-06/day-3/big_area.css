@@ -1,0 +1,32 @@
+* {
+    padding: 0;
+    margin: 0;
+}
+
+main {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
+    height: 500px;
+    grid-gap: 10px;
+    background: black;
+}
+
+div {
+    background: purple;
+}
+
+div:nth-child(2) {
+    display: flex;
+    background: green;
+    grid-column: 2 / 4;
+    grid-row: 1 / 3;
+    justify-content: center;
+    align-items: center;
+}
+
+p {
+    width: 400px;
+    height: 200px;
+    background: yellow;
+}
