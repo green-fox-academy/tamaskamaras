@@ -5,20 +5,26 @@
 
 body {
     display: flex;
-    flex-direction: column;
-    align-content: center;
+    justify-content: center;
     background: lightgray;
+}
+
+main {
+    width: 130px;
+}
+
+span {
+    color: rgb(223, 79, 27);
 }
 
 article {
     width: 30px;
     height: 23px;
-    background: lightblue;
     font-size: 0px;
     text-align: center;
     overflow: hidden;
     transition: 0.5s width;
-    border-radius: 3px 0 0 3px;
+    border-radius: 3px;
     margin: 50px;
     background: rgb(223, 79, 27);
     font-family: sans-serif;
@@ -36,7 +42,8 @@ div {
 
 article:hover {
     width: 130px;
-    font-size: 16px;    
+    font-size: 16px;
+    border-radius: 3px 0 0 3px;    
 }
 
 article:hover > div {
