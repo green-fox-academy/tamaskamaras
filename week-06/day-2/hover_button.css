@@ -1,0 +1,50 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    background: rgb(58, 54, 54);
+}
+
+div {
+    width: 150px;
+    height: 150px;
+    margin-top: 200px;
+    background: white;
+    border-radius: 3px;
+    transform: rotate(45deg);
+}
+
+p {
+    width: 146px;
+    height: 146px;
+    border: 4px coral solid;
+    color: black;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    letter-spacing: 3px;
+    text-align: center;
+    transition: 0.5s;
+    border-radius: 3px;
+    transform: rotate(-45deg)
+}
+
+span {
+    display: block;
+    width: 146px;
+    height: 83px;
+    padding-top: 63px;
+    transition: 0.5s;
+}
+
+p:hover {
+    transform: rotate(-90deg);
+}
+
+span:hover {
+    transform: rotate(45deg);
+    color: coral;
+}
