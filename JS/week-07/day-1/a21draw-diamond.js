@@ -14,7 +14,7 @@
 //
 // The diamond should have as many lines as lineCount is
 
-var lineCount = 7;
+var lineCount = 8;
 
 let upIteration = Math.ceil(lineCount / 2);
 
@@ -28,15 +28,18 @@ for (let i = 1; i < upIteration + 1; i++) {
 }
 
 let downIteration = Math.floor(lineCount / 2);
-for (let i = 0; i < upIteration + 1; i++) {
-    console.log(
-        ' '.repeat(i) +
-        '*'.repeat(2 * upIteration - (i * 2) ))
+
+let varia = 0
+
+if (lineCount % 2 !== 0) {
+    varia += 1;
 }
 
-
-
-
+for (let j = 0; j < downIteration; j++) {
+    console.log(
+        'x'.repeat(j + varia)
+    );
+}
 
 
 
