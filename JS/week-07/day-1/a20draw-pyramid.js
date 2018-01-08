@@ -17,14 +17,11 @@ var lineCount = 4;
 //     console.log('x'.repeat(j));
 // }
 
-console.log(' ')
-let star = '*';
-let spaces = lineCount;
-
-for (let i = 1; i < (lineCount + 1); i++) {
+let stars = '*'
+for (let i = 1; i < lineCount + 1; i++) {
     console.log(
-        ' '.repeat(spaces) + 
-        star);
-    star += '**';
-    spaces--;
+        ' '.repeat(lineCount - i) +
+        stars
+    )
+    stars += '**'
 }
