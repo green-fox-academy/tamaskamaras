@@ -11,6 +11,6 @@
 //  31
 //  1.87
 
-console.log('Tamas Kamaras')
-console.log(33)
-console.log(1.85)
+console.log('Tamas Kamaras');
+console.log(33);
+console.log(1.85);
