@@ -14,7 +14,7 @@ function greet(someone) {
     } else {
         console.log('Greetings, dear ' + someone)
     }
-}
+};
 
 greet();
 greet(al);
