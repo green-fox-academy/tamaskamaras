@@ -57,10 +57,6 @@ img {
     height: 100%;
 }
 
-/* main > div:nth-child(2n) > img {
-    height: 450px;
-} */
-
 .description {
     width: 770px;
     height: 105px;
