@@ -12,16 +12,28 @@ let leftButton = document.querySelector('.side:first-child')
 let rightButton = document.querySelector('.side:last-child')
 
 galeryItems.addEventListener('click', changePicture);
-// leftButton.addEventListener('click', );
-rightButton.addEventListener('click', stepPicture);
+leftButton.addEventListener('click', stepPictureLeft);
+rightButton.addEventListener('click', stepPictureRight);
 
 var current = 'file:///C:/Users/K/Desktop/greenfox/tamaskamaras/JS/week-07/day-4-5/image01.jpg';
 
-var clicks = 1;
+var clicks = 0;
 
-function stepPicture() {
-    centerImage.setAttribute('src', imageUrls[clicks])
+function stepPictureRight() {
+    if (clicks === imageUrls.length - 1) {
+        clicks = -1
+    }
     clicks += 1
+    centerImage.setAttribute('src', imageUrls[clicks])
+    console.log(clicks)
+};
+
+function stepPictureLeft() {
+    if (clicks === 0) {
+        clicks = imageUrls.length
+    }
+    clicks -= 1
+    centerImage.setAttribute('src', imageUrls[clicks])
 };
 
 function changePicture(e) {
@@ -30,7 +42,7 @@ function changePicture(e) {
     current = e.target.src
     imageUrls.forEach(function(element, i) {
         if (element === e.target.src) {
-            clicks = i + 1
+            clicks = i
         }
     })
 };
