@@ -8,16 +8,19 @@ document.querySelectorAll('#thumbnail > a > img').forEach(function(element, i) {
     imageUrls.push(element.src)
 });
 
-let leftButton = document.querySelector('.side:first-child')
-let rightButton = document.querySelector('.side:last-child')
+let leftButton = document.querySelector('.side:first-child');
+let rightButton = document.querySelector('.side:last-child');
 
 galeryItems.addEventListener('click', changePicture);
 leftButton.addEventListener('click', stepPictureLeft);
 rightButton.addEventListener('click', stepPictureRight);
 
 var current = 'file:///C:/Users/K/Desktop/greenfox/tamaskamaras/JS/week-07/day-4-5/image01.jpg';
-
 var clicks = 0;
+
+function removeAnimation() {
+    centerImage.removeAttribute('style')
+}
 
 function stepPictureRight() {
     if (clicks === imageUrls.length - 1) {
@@ -25,7 +28,8 @@ function stepPictureRight() {
     }
     clicks += 1
     centerImage.setAttribute('src', imageUrls[clicks])
-    console.log(clicks)
+    centerImage.setAttribute('style', 'animation-name: fadein; animation-duration: 1s')
+    setTimeout(removeAnimation, 1000)
 };
 
 function stepPictureLeft() {
@@ -34,6 +38,8 @@ function stepPictureLeft() {
     }
     clicks -= 1
     centerImage.setAttribute('src', imageUrls[clicks])
+    centerImage.setAttribute('style', 'animation-name: fadein; animation-duration: 1s')
+    setTimeout(removeAnimation, 1000)
 };
 
 function changePicture(e) {
@@ -45,4 +51,6 @@ function changePicture(e) {
             clicks = i
         }
     })
+    centerImage.setAttribute('style', 'animation-name: fadein; animation-duration: 1s')
+    setTimeout(removeAnimation, 1000)
 };
