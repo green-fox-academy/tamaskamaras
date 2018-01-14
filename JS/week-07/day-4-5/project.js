@@ -14,6 +14,13 @@ let rightButton = document.querySelector('.side:last-child');
 galeryItems.addEventListener('click', changePicture);
 leftButton.addEventListener('click', stepPictureLeft);
 rightButton.addEventListener('click', stepPictureRight);
+window.addEventListener('keydown', function(event) {
+    if (event.keyCode === 39) {
+        stepPictureRight()
+    } else if (event.keyCode === 37) {
+        stepPictureLeft()
+    }
+});
 
 var current = 'file:///C:/Users/K/Desktop/greenfox/tamaskamaras/JS/week-07/day-4-5/image01.jpg';
 var clicks = 0;
