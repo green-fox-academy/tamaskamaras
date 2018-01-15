@@ -18,9 +18,8 @@ function Animal() {
 function Farm(slots) {
     this.animals = [],
     this.slots = slots,
-    this.breed = function() {
-        for (let i = 0; i < this.slots; i++) {
-            console.log(i);
+    this.breed = function(totalAnimals) {
+        for (let i = 0; i < totalAnimals; i++) {
             if (this.animals.length < this.slots) {
                 let animal = new Animal();
                 this.animals.push(animal);
@@ -37,8 +36,9 @@ function Farm(slots) {
             };
         });
         this.animals.splice(indexLeastHungry, 1);
-    }
-}
+    },
+    this.breed(this.slots)
+};
 
 
 // Create a sheep farm with 20 slots
@@ -46,9 +46,7 @@ const SheepFarm = new Farm(20);
 
 console.log(SheepFarm.animals); // Should log 20 Animal objects
 
-
-////////////////////////////////////
-// const button = document.querySelector('button');
+const button = document.querySelector('button');
 
 // Add a click event to the button and call 'progress'
 
