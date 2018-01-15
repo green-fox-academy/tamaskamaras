@@ -33,8 +33,19 @@ button:active {
 }
 
 div {
+    display: flex;
+    flex-direction: column-reverse;
     min-width: 130px;
     min-height: 250px;
     margin: 100px;
+}
+
+p {
+    background: white;
     border: 1px solid black;
+    height: 25px;
+}
+
+.elevator {
+    background: green;
 }
