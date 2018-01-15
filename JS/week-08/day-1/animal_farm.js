@@ -27,7 +27,7 @@ function Farm(slots) {
         }
     },
     this.slaughter = function() {
-        let leastHungry = animals[0];
+        let leastHungry = this.animals[0];
         let indexLeastHungry = 0;
         this.animals.forEach(function(element, i) {
             if (element.hunger < leastHungry.hunger) {
@@ -37,7 +37,29 @@ function Farm(slots) {
         });
         this.animals.splice(indexLeastHungry, 1);
     },
-    this.breed(this.slots)
+    this.printReport = function() {
+        console.log('The farm has ' + this.animals.length + ' living animals.');
+        if (this.animals.length <= 0) {
+            console.log('Bankrupt!');
+        } else if (this.animals.length > 0 && this.animals.length < this.slots) {
+            console.log('Okay');
+        } else if (this.animals.length === this.slots) {
+            console.log('Full');
+        }
+    },
+    this.progress = function() {
+        this.animals.forEach(function(element) {
+            if (Math.floor(Math.random() * 2) === 0) {
+                element.eat();
+                element.drink();
+                element.play();
+            }
+        })
+        this.breed(this.slots);
+        this.slaughter();
+        this.printReport();
+    },
+    this.breed(this.slots);
 };
 
 
@@ -46,7 +68,17 @@ const SheepFarm = new Farm(20);
 
 console.log(SheepFarm.animals); // Should log 20 Animal objects
 
+console.log(SheepFarm.animals.length);
+SheepFarm.slaughter();
+console.log(SheepFarm.animals.length);
+SheepFarm.printReport();
+SheepFarm.progress()
+
 const button = document.querySelector('button');
+
+let sheepProgress = SheepFarm.progress.bind(SheepFarm);
+
+button.addEventListener('click', sheepProgress);
 
 // Add a click event to the button and call 'progress'
 
