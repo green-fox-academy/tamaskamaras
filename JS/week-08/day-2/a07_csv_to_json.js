@@ -34,21 +34,11 @@ Loris tardigratus;725;Orange`;
 // Don't use for or forEach
 
 
-// function csvToJson(line) {
-//     let temp = line.split(';')
-//     return {
-//         name: temp[0], id: temp[1], color_code: temp[2]
-// }
-
-let myArray = data.split('\n');
-
-let final = myArray.map(function(line) {
+let csvToJson = function(line) {
     let temp = line.split(';')
-    return {
-        name: temp[0], id: temp[1], color_code: temp[2]
-    }
-})
+    return {name: temp[0], id: temp[1], color_code: temp[2]}
+};
+
+let final = data.split('\n').map(csvToJson);
+
 console.log(final);
-
-
-
