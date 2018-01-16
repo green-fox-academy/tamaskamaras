@@ -42,6 +42,8 @@ div {
 
 p {
     background: white;
+    color: white;
+    text-align: center;
     border: 1px solid black;
     height: 25px;
 }

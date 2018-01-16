@@ -26,20 +26,24 @@ class ElevatorModel {
     };
 
     moveUp() {
-        console.log(this.ground);
-        if (this.ground < this.maxFloor) {
+        if (this.ground <= this.maxFloor) {
             document.getElementById('f' + this.ground).className = 'elevator';
-            document.getElementById('f' + (this.ground - 1)).classList.remove('elevator');
+            if (this.ground > 0) {
+                document.getElementById('f' + (this.ground - 1)).classList.remove('elevator');
+            }
             this.ground++;
+            console.log(this.ground);
         }
     };
 
     moveDown() {
-        console.log(this.ground);
         if (this.ground > 0) {
             document.getElementById('f' + (this.ground - 1)).className = 'elevator';
-            document.getElementById('f' + (this.ground)).classList.remove('elevator');
+            if (this.ground <= this.maxFloor) {
+                document.getElementById('f' + (this.ground)).classList.remove('elevator');
+            }
             this.ground--;
+            console.log(this.ground);
         }
     };
 };
@@ -56,7 +60,7 @@ class ElevatorView{
         for (let i = 0; i < this.floors + 1; i++) {
             let floor = document.createElement('p');
             floor.id = 'f' + i;
-            floor.textContent = i;
+            floor.textContent = 0;
             shaft.appendChild(floor);
         }
         document.getElementById('f0').className = 'elevator';
