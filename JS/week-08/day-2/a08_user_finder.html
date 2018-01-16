@@ -1,0 +1,44 @@
+'use strict';
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Users</title>
+</head>
+<body>
+    <script src="users.js"></script>
+    <script>
+        // The users variables comes from the file included above
+        console.log(users.length)
+        // First select from the list the users whose bitcoin address AND email address is provided
+        // Then return a list of users. Each user should be in the following format:
+        
+        let userFilter = function(user) {
+            if (user.bitcoin_address && user.email) {
+                return {
+                    full_name: user.first_name + ' ' + user.last_name,
+                    address: {
+                        bitcoin: user.bitcoin_address,
+                        email: user.email
+                    }}}}
+        
+        let bitcoiners = users.map(userFilter);
+
+
+
+
+        console.log(bitcoiners);
+        singleUser = {
+            full_name: "Elite Hacker",
+            addresses: {
+                bitcoin: 'ligehs98wtz4u9ötuw...',
+                email: 'hello@example.com'
+            }
+        }
+        // Do not use for or forEach
+    </script>
+</body>
+</html>
