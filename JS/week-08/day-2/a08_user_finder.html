@@ -23,14 +23,14 @@
                     address: {
                         bitcoin: user.bitcoin_address,
                         email: user.email
-                    }}}}
+                    }}}};
+                    
+        let bitcoinersMap = users.map(userFilter);
+
+        let finalListOfUsers = bitcoinersMap.filter(user => user !== undefined);
+
+        console.log(finalListOfUsers);
         
-        let bitcoiners = users.map(userFilter);
-
-
-
-
-        console.log(bitcoiners);
         singleUser = {
             full_name: "Elite Hacker",
             addresses: {
