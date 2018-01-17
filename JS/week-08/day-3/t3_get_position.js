@@ -1,6 +1,5 @@
 'use strict';
 
-
 document.querySelector('button').addEventListener('click', getInput);
 
 function getInput() {
@@ -10,16 +9,37 @@ function getInput() {
 }
 
 function request(city) {
-    let myRequest = new XMLHttpRequest();
+    let coordinateRequest = new XMLHttpRequest();
     let url = 'https://devru-latitude-longitude-find-v1.p.mashape.com/latlon.php?location='
-    let apiKey = 'QiM9uMx4zmmshefk5m4d0wSGPEDqp1g7jwkjsnVhlozRqKsoS6';
-    myRequest.open('GET', url + city);
-    myRequest.setRequestHeader('X-Mashape-Key', apiKey);
-    myRequest.setRequestHeader('Accept', 'application/json');
-    myRequest.send();
-    myRequest.onreadystatechange = function() {
-        if (myRequest.readyState === 4) {
-            console.log(myRequest);
+    let mashapeApiKey = 'QiM9uMx4zmmshefk5m4d0wSGPEDqp1g7jwkjsnVhlozRqKsoS6';
+    coordinateRequest.open('GET', url + city);
+    coordinateRequest.setRequestHeader('X-Mashape-Key', mashapeApiKey);
+    coordinateRequest.setRequestHeader('Accept', 'application/json');
+    coordinateRequest.send();
+    coordinateRequest.onreadystatechange = function() {
+        if (coordinateRequest.readyState === 4) {
+            console.log(coordinateRequest);
+            let latitude;
+            let longitude;
+            getGoogleRequest(latitude, longitude);
+        };
+    };
+};
+
+function getGoogleRequest(latitude, longitude) {
+    let googleRequest = new XMLHttpRequest();
+    let googleUrl = 'https://www.google.com/maps/embed/v1/view?key=';
+    let googleApiKey = 'AIzaSyD1yZtmkTRI7GIWOBC5K3p24-Nz4HJd65Q';
+    let center = '&center' + latitude + ',' + longitude;
+    let zoom = '&zoom' + 15;
+    // let maptype = '&maptype=roadmap';
+    let embed = googleUrl + googleApiKey + center + zoom;
+    googleRequest.open('GET', embed);
+    googleRequest.send();
+    googleRequest.onreadystatechange = function() {
+        if (googleRequest.readyState === 4) {
+            console.log(googleRequest);
+            document.querySelector('iframe').setAttribute('src', embed);
         };
     };
 };
