@@ -11,14 +11,16 @@ function getInput() {
 function request(city) {
     let coordinateRequest = new XMLHttpRequest();
     let url = 'https://devru-latitude-longitude-find-v1.p.mashape.com/latlon.php?location='
-    let mashapeApiKey = 'QiM9uMx4zmmshefk5m4d0wSGPEDqp1g7jwkjsnVhlozRqKsoS6';
+    // let mashapeApiKey = 'QiM9uMx4zmmshefk5m4d0wSGPEDqp1g7jwkjsnVhlozRqKsoS6';
+    // let mashapeApiKey = 'AGA0Lh7DqKmshEgT1Rr5HjR3XJhgp1ZRWdnjsntoYwVx5GaYun';
+    let mashapeApiKey = 'uyFKkGLBA2mshZzbRW7rezal9uxpp1hojMSjsnbh4DVzglRhph';
     coordinateRequest.open('GET', url + city);
     coordinateRequest.setRequestHeader('X-Mashape-Key', mashapeApiKey);
     coordinateRequest.setRequestHeader('Accept', 'application/json');
     coordinateRequest.send();
     coordinateRequest.onreadystatechange = function() {
+        console.log(coordinateRequest);
         if (coordinateRequest.readyState === 4) {
-            console.log(coordinateRequest);
             let latitude;
             let longitude;
             getGoogleRequest(latitude, longitude);
