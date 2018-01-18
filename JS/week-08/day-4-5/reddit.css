@@ -4,9 +4,8 @@
 }
 
 header {
-    position: absolute;
-    height: 95px;
     width: 100%;
+    height: 95px;
     padding-top: 55px;
     overflow: hidden;
     text-align: center;
@@ -16,4 +15,68 @@ header {
     font-weight: 300;
     font-size: 2em;
     letter-spacing: 1em;
+}
+
+body {
+    background: lightgray;
+    font-family: 'Lato', sans-serif;
+    font-weight: bold;
+}
+
+
+main {
+    float: left;
+    width: 65%;
+    margin: 10px 0 10px 10px;
+    background: white;
+}
+
+.title {
+    font-size: 1.4em;
+}
+.post {
+    height: 100px;
+}
+
+.vote {
+    float: left;
+    width: 100px;
+    padding-top: 15px;
+    text-align: center;
+}
+
+.post > section {
+    margin: 10px;
+}
+
+body > section {
+    float: right;
+    width: 30%;
+    margin: 10px 10px 10px 0;
+    text-align: center;
+}
+
+body > section > a {
+    display: block;
+    width: 100%;
+    height: 30px;
+    background: blue;
+    text-decoration: none;
+    color: white;
+}
+
+body > section > div {
+    margin-top: 10px;
+    background: rgb(233, 230, 230);
+}
+
+body > section > div > p {
+    height: 40px;
+    background: white;
+}
+
+ul {
+    text-align: left;
+    padding: 10px;
+    margin-left: 20px;
 }
