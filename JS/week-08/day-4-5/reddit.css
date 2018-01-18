@@ -1,0 +1,19 @@
+* {
+    padding: 0px;
+    margin: 0px;
+}
+
+header {
+    position: absolute;
+    height: 95px;
+    width: 100%;
+    padding-top: 55px;
+    overflow: hidden;
+    text-align: center;
+    background-image: url('space.jpg');
+    color: white;
+    font-family: 'Lato', sans-serif;
+    font-weight: 300;
+    font-size: 2em;
+    letter-spacing: 1em;
+}
