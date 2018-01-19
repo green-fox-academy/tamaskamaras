@@ -20,7 +20,6 @@ function separatePosts(posts) {
 };
 
 function createTags(post) {
-	console.log(post);
 	let newPost = document.createElement('div');
 	let vote = document.createElement('div');
 	let voteUp = document.createElement('a');
