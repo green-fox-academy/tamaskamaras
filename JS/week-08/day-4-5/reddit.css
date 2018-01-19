@@ -31,13 +31,15 @@ main {
 	background: white;
 }
 
-.title {
-	font-size: 1.4em;
-}
 .post {
 	height: 100px;
 	border: 1px solid lightgray;
 	overflow: hidden;
+}
+
+.title {
+	display: block;
+	font-size: 1.4em;
 }
 
 .vote {
@@ -105,4 +107,6 @@ input {
 
 a {
 	margin-left: 2px;
+	max-width: 350px;
+	overflow: hidden;
 }
