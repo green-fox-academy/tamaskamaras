@@ -13,9 +13,10 @@ function getUrl(title) {
 };
 
 function postRequest(title, postUrl) {
+	let leviUrl = 'https://time-radish.glitch.me/posts'
 	let requestUrl = 'http://secure-reddit.herokuapp.com/simple/posts';
 	let request = new XMLHttpRequest();
-	request.open('POST', requestUrl);
+	request.open('POST', leviUrl);
 	request.setRequestHeader('Accept', 'application/json');
 	request.setRequestHeader('Content-Type', 'application/json');
 	let body = JSON.stringify({
@@ -24,8 +25,9 @@ function postRequest(title, postUrl) {
 	});
 	console.log(body);
 	request.onreadystatechange = function() {
-		if (request.readyState === XMLHttpRequest.DONE) {
+		if (request.readyState === XMLHttpRequest.DONE && request.status === 200) {
 			console.log(request);
+			window.location.href = 'reddit.html';
 		};
 	};
 	request.send(body);

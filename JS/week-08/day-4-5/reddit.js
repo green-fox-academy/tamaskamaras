@@ -2,8 +2,9 @@
 
 function requestPosts() {
 	let myRequest = new XMLHttpRequest();
+	let leviUrl = 'https://time-radish.glitch.me/posts'
 	let url = 'http://secure-reddit.herokuapp.com/simple/posts';
-	myRequest.open('GET', url);
+	myRequest.open('GET', leviUrl);
 	myRequest.onreadystatechange = function() {
 		if (myRequest.readyState === XMLHttpRequest.DONE) {
 				let posts = JSON.parse(myRequest.response).posts;
@@ -33,13 +34,16 @@ function createTags(post) {
 	vote.className = 'vote';
 	voteUp.className = 'voteup';
 
-	voteUp.setAttribute('href', '');
 	upImage.setAttribute('src', 'upvote.png');
+	upImage.setAttribute('class', post.id);
+	upImage.setAttribute('name', 'upvote');
 
 	score.textContent = post.score;
+	score.setAttribute('class', post.id);
 
-	voteDown.setAttribute('href', '');
 	downImage.setAttribute('src', 'downvote.png');
+	downImage.setAttribute('class', post.id);
+	downImage.setAttribute('name', 'downvote');
 
 	document.querySelector('main').appendChild(newPost);
 	newPost.appendChild(vote);
@@ -66,11 +70,11 @@ function createTags(post) {
 	aTag3.textContent = 'xx comments';
 
 	let aTag4 = document.createElement('a');
-	aTag4.setAttribute('href', '');
+	// aTag4.setAttribute('href', '');
 	aTag4.textContent = 'Modify';
 
 	let aTag5 = document.createElement('a');
-	aTag5.setAttribute('href', '');
+	// aTag5.setAttribute('href', '');
 	aTag5.textContent = 'Remove';
 
 	newPost.appendChild(sectionPost);
@@ -83,3 +87,57 @@ function createTags(post) {
 }
 
 requestPosts();
+
+document.querySelector('main').addEventListener('click', userActions)
+
+function userActions(event) {
+	console.log(event.target);
+	if (event.target.localName === 'img' && event.target.name === 'upvote') {
+		voteIncrement(event.target);
+	} else if (event.target.localName === 'img' && event.target.name === 'downvote') {
+		voteDecrement(event.target);
+	} else if (event.target.innerText === 'Remove') {
+		deletePost(event.target);
+	};
+};
+
+function voteIncrement(target) {
+	let leviUrl = 'https://time-radish.glitch.me/posts/'
+	let request = new XMLHttpRequest();
+	request.open('PUT', leviUrl + target.className + '/upvote');
+	request.setRequestHeader('Accept', 'application/json');
+	let body = JSON.stringify({
+		"id": target.className,
+		"score": 1
+	});
+	request.onreadystatechange = function() {
+		if (request.readyState === XMLHttpRequest.DONE && request.status === 200) {
+			let scoreTag = document.querySelector('p[class="' + target.className + '"]');
+			scoreTag.textContent = JSON.parse(request.response).score;
+		};
+	};
+	request.send(body);
+};
+
+function voteDecrement(target) {
+	console.log('Decrease');
+	let leviUrl = 'https://time-radish.glitch.me/posts/'
+	let request = new XMLHttpRequest();
+	request.open('PUT', leviUrl + target.className + '/downvote');
+	request.setRequestHeader('Accept', 'application/json');
+	let body = JSON.stringify({
+		"id": target.className,
+		"score": 1
+	});
+	request.onreadystatechange = function() {
+		if (request.readyState === XMLHttpRequest.DONE && request.status === 200) {
+			let scoreTag = document.querySelector('p[class="' + target.className + '"]');
+			scoreTag.textContent = JSON.parse(request.response).score;
+		};
+	};
+	request.send(body);
+};
+
+function deletePost(target) {
+	console.log('Delete');
+};

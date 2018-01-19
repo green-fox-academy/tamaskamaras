@@ -101,3 +101,7 @@ input {
 	background: rgb(233, 230, 230);;
 	border: 1px solid lightgray;
 }
+
+a {
+	margin-left: 2px;
+}
