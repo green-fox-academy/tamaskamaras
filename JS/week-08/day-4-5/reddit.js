@@ -74,7 +74,7 @@ function createTags(post) {
 	aTag4.textContent = 'Modify';
 
 	let aTag5 = document.createElement('a');
-	// aTag5.setAttribute('href', '');
+	aTag5.className = post.id;
 	aTag5.textContent = 'Remove';
 
 	newPost.appendChild(sectionPost);
@@ -120,7 +120,6 @@ function voteIncrement(target) {
 };
 
 function voteDecrement(target) {
-	console.log('Decrease');
 	let leviUrl = 'https://time-radish.glitch.me/posts/'
 	let request = new XMLHttpRequest();
 	request.open('PUT', leviUrl + target.className + '/downvote');
@@ -140,4 +139,20 @@ function voteDecrement(target) {
 
 function deletePost(target) {
 	console.log('Delete');
+	console.log(target);
+	let leviUrl = 'https://time-radish.glitch.me/posts/'
+	let request = new XMLHttpRequest();
+	request.open('DELETE', leviUrl + target.className);
+	request.setRequestHeader('Accept', 'application/json');
+	let body = JSON.stringify({
+		"id": target.className
+	});
+	request.onreadystatechange = function() {
+		if (request.readyState === XMLHttpRequest.DONE && request.status === 200) {
+			console.log(request);
+			let deleteTag = document.querySelector('div[class="post"]');
+			deleteTag.remove();
+		};
+	};
+	request.send(body);
 };
