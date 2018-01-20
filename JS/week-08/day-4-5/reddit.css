@@ -109,4 +109,5 @@ a {
 	margin-left: 2px;
 	max-width: 350px;
 	overflow: hidden;
+	cursor: pointer;
 }

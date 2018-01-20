@@ -30,7 +30,8 @@ function createTags(post) {
 	let downImage = document.createElement('img');
 	let section = document.createElement('section');
 
-	newPost.className = 'post';
+	newPost.className = 'post ' + post.id;
+	// newPost.className = post.id;
 	vote.className = 'vote';
 	voteUp.className = 'voteup';
 
@@ -91,7 +92,6 @@ requestPosts();
 document.querySelector('main').addEventListener('click', userActions)
 
 function userActions(event) {
-	console.log(event.target);
 	if (event.target.localName === 'img' && event.target.name === 'upvote') {
 		voteIncrement(event.target);
 	} else if (event.target.localName === 'img' && event.target.name === 'downvote') {
@@ -138,8 +138,6 @@ function voteDecrement(target) {
 };
 
 function deletePost(target) {
-	console.log('Delete');
-	console.log(target);
 	let leviUrl = 'https://time-radish.glitch.me/posts/'
 	let request = new XMLHttpRequest();
 	request.open('DELETE', leviUrl + target.className);
@@ -149,8 +147,7 @@ function deletePost(target) {
 	});
 	request.onreadystatechange = function() {
 		if (request.readyState === XMLHttpRequest.DONE && request.status === 200) {
-			console.log(request);
-			let deleteTag = document.querySelector('div[class="post"]');
+			let deleteTag = document.querySelector('div[class="post ' + target.className + '"]');
 			deleteTag.remove();
 		};
 	};
