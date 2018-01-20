@@ -79,6 +79,7 @@ body > section > div {
 body > section > div > p {
 	height: 40px;
 	background: white;
+	font-weight: bold;
 }
 
 ul {

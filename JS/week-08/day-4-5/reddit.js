@@ -15,7 +15,7 @@ function requestPosts() {
 };
 
 function separatePosts(posts) {
-	for (let i in posts) {
+	for (let i = posts.length - 1; i > -1; i--) {
 		createTags(posts[i]);
 	}
 };
