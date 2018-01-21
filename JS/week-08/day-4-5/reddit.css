@@ -111,3 +111,8 @@ a {
 	overflow: hidden;
 	cursor: pointer;
 }
+
+@keyframes collapse {
+	from {height: 100px;}
+	to {height: 0px;}
+}

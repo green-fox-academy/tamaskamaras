@@ -60,7 +60,7 @@ function createTags(post) {
 	aTag1.textContent = post.title;
 	let submitTime = document.createElement('p');
 	submitTime.textContent = 'submitted ' +
-		parseInt((post.timestamp/1000/60/60/24) - (Date.now()/1000/60/60/24)) + ' days ago by';
+		parseInt((Date.now()/1000/60/60/24) - (post.timestamp/1000/60/60/24)) + ' days ago by';
 	
 	let aTag2 = document.createElement('a');
 	aTag2.setAttribute('href', '');
@@ -148,8 +148,13 @@ function deletePost(target) {
 	request.onreadystatechange = function() {
 		if (request.readyState === XMLHttpRequest.DONE && request.status === 200) {
 			let deleteTag = document.querySelector('div[class="post ' + target.className + '"]');
-			deleteTag.remove();
+			deleteTag.setAttribute('style', 'animation-name: collapse; animation-duration: 1s')
+			function removeOneTag() {
+				deleteTag.remove();
+			}
+			setTimeout(removeOneTag, 1000);
 		};
 	};
 	request.send(body);
 };
+
