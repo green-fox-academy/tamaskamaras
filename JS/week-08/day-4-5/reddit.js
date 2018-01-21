@@ -31,7 +31,6 @@ function createTags(post) {
 	let section = document.createElement('section');
 
 	newPost.className = 'post ' + post.id;
-	// newPost.className = post.id;
 	vote.className = 'vote';
 	voteUp.className = 'voteup';
 
@@ -60,7 +59,8 @@ function createTags(post) {
 	aTag1.className = 'title';
 	aTag1.textContent = post.title;
 	let submitTime = document.createElement('p');
-	submitTime.textContent = 'submitted ' + parseInt(post.timestamp/1000/60/60/24) + ' days ago by';
+	submitTime.textContent = 'submitted ' +
+		parseInt((post.timestamp/1000/60/60/24) - (Date.now()/1000/60/60/24)) + ' days ago by';
 	
 	let aTag2 = document.createElement('a');
 	aTag2.setAttribute('href', '');
