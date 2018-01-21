@@ -1,6 +1,11 @@
 'use strict';
 
 document.querySelector('a').addEventListener('click', getTitle);
+window.addEventListener('keydown', (event) => {
+	if (event.keyCode === 13) {
+		getTitle()
+	}
+});
 
 function getTitle() {
   let title = document.getElementById('title').value;
