@@ -1,24 +1,27 @@
 'use strict';
 
-function requestPosts() {
-	let myRequest = new XMLHttpRequest();
-	let leviUrl = 'https://time-radish.glitch.me/posts'
-	let url = 'http://secure-reddit.herokuapp.com/simple/posts';
-	myRequest.open('GET', leviUrl);
-	myRequest.onreadystatechange = function() {
-		if (myRequest.readyState === XMLHttpRequest.DONE) {
-				let posts = JSON.parse(myRequest.response).posts;
-				separatePosts(posts);
+let leviUrl = 'https://time-radish.glitch.me/posts'
+let herokuUrl = 'http://secure-reddit.herokuapp.com/simple/posts';
+
+function requestPosts(method, url, callback) {
+	let request = new XMLHttpRequest();
+	request.open(method, url);
+	request.onreadystatechange = function() {
+		if (request.readyState === XMLHttpRequest.DONE) {
+			let posts = JSON.parse(request.response).posts;
+			callback(posts, createTags);
 		};
 	};
-	myRequest.send();
+	request.send();
 };
 
-function separatePosts(posts) {
+function separatePosts(posts, callback) {
 	for (let i = posts.length - 1; i > -1; i--) {
-		createTags(posts[i]);
+		callback(posts[i]);
 	}
 };
+
+requestPosts('GET', leviUrl, separatePosts);
 
 function createTags(post) {
 	let newPost = document.createElement('div');
@@ -71,7 +74,6 @@ function createTags(post) {
 	aTag3.textContent = 'xx comments';
 
 	let aTag4 = document.createElement('a');
-	// aTag4.setAttribute('href', '');
 	aTag4.textContent = 'Modify';
 
 	let aTag5 = document.createElement('a');
@@ -87,7 +89,6 @@ function createTags(post) {
 	sectionPost.appendChild(aTag5);
 }
 
-requestPosts();
 
 document.querySelector('main').addEventListener('click', userActions)
 

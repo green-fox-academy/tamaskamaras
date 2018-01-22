@@ -1,5 +1,7 @@
 'use strict';
 
+document.getElementById('title').select();
+
 document.querySelector('a').addEventListener('click', getTitle);
 window.addEventListener('keydown', (event) => {
 	if (event.keyCode === 13) {
