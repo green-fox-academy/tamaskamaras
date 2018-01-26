@@ -1,6 +1,7 @@
 'use strict';
 
 const express = require('express');
+const bodyParser = require('body-parser');
 
 const app = express();
 let post = 8080;
@@ -45,6 +46,38 @@ app.get('/appenda/:word', function(req, res) {
     res.send(result)
   }
 });
+
+app.use(bodyParser.json())
+
+app.post('/dountil/*', function(req, res) {
+  console.log(req.params[0])
+  console.log(req.body)
+  if (req.params[0] === 'sum') {
+    let fibon = fibonacci(req.body.until);
+    let result = {"result": fibon}
+    res.send(result)
+  } else if (req.params[0] === 'factor') {
+    let fact = factorial(req.body.until);
+    let result = {"result": fact};
+    res.send(result);
+  }
+});
+
+function fibonacci (until) {
+  let result = 0;
+    for (let i = 1; i < until + 1; i++) {
+        result += i
+    }
+    return result
+  }
+  
+function factorial (until) {
+  let result = 1;
+    for (let i = 1; i < until + 1; i++) {
+        result *= i
+    }
+    return result
+}
 
 app.listen(8080, function() {
   console.log(`App is listening on ${post}`)
