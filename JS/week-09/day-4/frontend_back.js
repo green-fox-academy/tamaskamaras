@@ -1,29 +1,29 @@
 'use strict';
 
 const express = require('express');
-const bodyParser = require('body-parser');
 
 const app = express();
 let post = 8080;
 
-app.use('/assets', express.static('assets'))
+app.use(express.json());
+app.use('/assets', express.static('assets'));
 
 app.get('/', function(req, res) {
-  res.sendFile(__dirname + '/index.html')
+  res.sendFile(__dirname + '/index.html');
 });
 
 app.get('/doubling', function(req, res) {
-  let temp = {}
+  let message = {};
   if (req.query.input === undefined) {
-    temp = {"error": "Please provide an input!"}
+    message = {"error": "Please provide an input!"};
   } else {
-    temp = {
+    message = {
           "received": req.query.input,
           "result": (2 * req.query.input)
-        }
-  }
-  res.send(temp);
-})
+        };
+  };
+  res.send(message);
+});
 
 app.get('/greeter', function(req, res) {
   let greet = {};
@@ -40,27 +40,19 @@ app.get('/greeter', function(req, res) {
 app.get('/appenda/:word', function(req, res) {
   let result = {};
   if (req.params.word.length > 0) {
-    result = {
-      "appended": (req.params.word + 'a')
-    }
-    res.send(result)
-  }
+    result = {"appended": (req.params.word + 'a')};
+    res.send(result);
+  };
 });
 
-app.use(bodyParser.json())
-
 app.post('/dountil/*', function(req, res) {
-  console.log(req.params[0])
-  console.log(req.body)
+  let result = {};
   if (req.params[0] === 'sum') {
-    let fibon = fibonacci(req.body.until);
-    let result = {"result": fibon}
-    res.send(result)
+    result = {"result": fibonacci(req.body.until)};
   } else if (req.params[0] === 'factor') {
-    let fact = factorial(req.body.until);
-    let result = {"result": fact};
-    res.send(result);
-  }
+    result = {"result": factorial(req.body.until)};
+  };
+  res.send(result);
 });
 
 function fibonacci (until) {
