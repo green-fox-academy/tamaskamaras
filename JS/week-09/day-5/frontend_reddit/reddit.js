@@ -2,7 +2,7 @@
 
 let leviUrl = 'https://time-radish.glitch.me/posts';
 let herokuUrl = 'http://secure-reddit.herokuapp.com/simple/posts';
-let lokalUrl = 'http://localhost:8080/';
+let localUrl = 'http://localhost:8080/';
 
 function requestPosts(method, url, separatePosts) {
 	let request = new XMLHttpRequest();
@@ -10,7 +10,6 @@ function requestPosts(method, url, separatePosts) {
 	request.onreadystatechange = function() {
 		if (request.readyState === XMLHttpRequest.DONE) {
 			let posts = JSON.parse(request.response);
-			console.log(posts);
 			separatePosts(posts, createTags);
 		};
 	};
@@ -23,7 +22,7 @@ function separatePosts(posts, callback) {
 	}
 };
 
-requestPosts('GET', lokalUrl, separatePosts);
+requestPosts('GET', localUrl, separatePosts);
 
 function createTags(post) {
 	let newPost = document.createElement('div');

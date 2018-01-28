@@ -1,5 +1,9 @@
 'use strict';
 
+// const express = require('express');
+// const app = express();
+// app.use(express.static('frontend_reddit'));
+
 document.getElementById('title').select();
 
 document.querySelector('a').addEventListener('click', getTitle);
@@ -22,8 +26,9 @@ function getUrl(title) {
 function postRequest(title, postUrl) {
 	let leviUrl = 'https://time-radish.glitch.me/posts'
 	let requestUrl = 'http://secure-reddit.herokuapp.com/simple/posts';
+	let localUrl = 'http://localhost:8080/posts';
 	let request = new XMLHttpRequest();
-	request.open('POST', leviUrl);
+	request.open('POST', localUrl);
 	request.setRequestHeader('Accept', 'application/json');
 	request.setRequestHeader('Content-Type', 'application/json');
 	let body = JSON.stringify({
