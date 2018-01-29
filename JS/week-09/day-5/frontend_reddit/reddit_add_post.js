@@ -39,7 +39,7 @@ function postRequest(title, postUrl) {
 	request.onreadystatechange = function() {
 		if (request.readyState === XMLHttpRequest.DONE && request.status === 200) {
 			console.log(request);
-			window.location.href = 'reddit.html';
+			window.location.href = 'http://localhost:8080/';
 		};
 	};
 	request.send(body);
