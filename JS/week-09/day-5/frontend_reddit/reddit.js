@@ -105,24 +105,28 @@ function userActions(event) {
 
 function voteIncrement(target) {
 	let leviUrl = 'https://time-radish.glitch.me/posts/'
+	let localUrl = 'http://localhost:8080/posts/';
 	let request = new XMLHttpRequest();
-	request.open('PUT', leviUrl + target.className + '/upvote');
+	request.open('PUT', localUrl + target.className + '/upvote');
 	request.setRequestHeader('Accept', 'application/json');
 	let body = JSON.stringify({
 		"id": target.className,
 		"score": 1
 	});
 	request.onreadystatechange = function() {
-		if (request.readyState === XMLHttpRequest.DONE && request.Status === 200) {
+		if (request.readyState === XMLHttpRequest.DONE && request.status === 200) {
 			let scoreTag = document.querySelector('p[class="' + target.className + '"]');
+			console.log(JSON.parse(request.response));
 			scoreTag.textContent = JSON.parse(request.response).score;
 		};
 	};
+	console.log(body)
 	request.send(body);
 };
 
 function voteDecrement(target) {
 	let leviUrl = 'https://time-radish.glitch.me/posts/'
+	let localUrl = 'http://localhost:8080/posts/';	
 	let request = new XMLHttpRequest();
 	request.open('PUT', leviUrl + target.className + '/downvote');
 	request.setRequestHeader('Accept', 'application/json');
@@ -131,7 +135,7 @@ function voteDecrement(target) {
 		"score": 1
 	});
 	request.onreadystatechange = function() {
-		if (request.readyState === XMLHttpRequest.DONE && request.Status === 200) {
+		if (request.readyState === XMLHttpRequest.DONE && request.status === 200) {
 			let scoreTag = document.querySelector('p[class="' + target.className + '"]');
 			scoreTag.textContent = JSON.parse(request.response).score;
 		};

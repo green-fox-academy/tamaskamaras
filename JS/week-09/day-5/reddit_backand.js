@@ -63,9 +63,45 @@ app.delete('/posts/:id', function(req, res) {
       res.status(500).send('Database error, delete');
       return;
     }
-    res.json({message: 'OK'});
+    res.send(JSON.stringify(rows));
   });
 });
+
+app.put('/posts/:id/upvote', function(req, res) {
+  conn.query('UPDATE posts SET score = score + 1 WHERE id = ' + req.params.id + ';', function(err, rows) {
+    if (err) {
+      console.log(err.toString());
+      res.status(500).send('Darabase error, update');
+      return;
+    }
+    conn.query('SELECT * FROM posts WHERE id = ' + req.params.id + ';', function(err2, rows2) {
+      if (err) {
+        console.log(err.toString());
+        res.status(500).send('Database error, request score data')
+        return;
+      }
+      res.send(JSON.stringify(rows2[0]));
+    })
+  })
+})
+
+app.put('/posts/:id/downvote', function(req, res) {
+  conn.query('UPDATE posts SET score = score - 1 WHERE id = ' + req.params.id + ';', function(err, rows) {
+    if (err) {
+      console.log(err.toString());
+      res.status(500).send('Darabase error, update');
+      return;
+    }
+    conn.query('SELECT * FROM posts WHERE id = ' + req.params.id + ';', function(err2, rows2) {
+      if (err) {
+        console.log(err.toString());
+        res.status(500).send('Database error, request score data')
+        return;
+      }
+      res.send(JSON.stringify(rows2[0]));
+    })
+  })
+})
 
 app.listen(post, function() {
   console.log('App is listening on ' + post);
