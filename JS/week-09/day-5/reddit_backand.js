@@ -51,12 +51,21 @@ app.post('/posts', function(req, res) {
       res.status(500).send('Database error, post');
       return;
     };
-    res.json({
-      message: 'OK',
-    });
+    res.json({message: 'OK',});
   });
 }); 
 // conn.end();
+
+app.delete('/posts/:id', function(req, res) {
+  conn.query('DELETE FROM posts WHERE id = "' + req.params.id + '";', function(err, rows) {
+    if (err) {
+      console.log(err.toString());
+      res.status(500).send('Database error, delete');
+      return;
+    }
+    res.json({message: 'OK'});
+  });
+});
 
 app.listen(post, function() {
   console.log('App is listening on ' + post);

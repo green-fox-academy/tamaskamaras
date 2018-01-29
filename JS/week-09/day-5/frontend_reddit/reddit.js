@@ -107,7 +107,7 @@ function voteIncrement(target) {
 	let leviUrl = 'https://time-radish.glitch.me/posts/'
 	let request = new XMLHttpRequest();
 	request.open('PUT', leviUrl + target.className + '/upvote');
-	request.SetRequestHeader('Accept', 'application/json');
+	request.setRequestHeader('Accept', 'application/json');
 	let body = JSON.stringify({
 		"id": target.className,
 		"score": 1
@@ -118,14 +118,14 @@ function voteIncrement(target) {
 			scoreTag.textContent = JSON.parse(request.response).score;
 		};
 	};
-	request.Send(body);
+	request.send(body);
 };
 
 function voteDecrement(target) {
 	let leviUrl = 'https://time-radish.glitch.me/posts/'
 	let request = new XMLHttpRequest();
 	request.open('PUT', leviUrl + target.className + '/downvote');
-	request.SetRequestHeader('Accept', 'application/json');
+	request.setRequestHeader('Accept', 'application/json');
 	let body = JSON.stringify({
 		"id": target.className,
 		"score": 1
@@ -136,19 +136,20 @@ function voteDecrement(target) {
 			scoreTag.textContent = JSON.parse(request.response).score;
 		};
 	};
-	request.Send(body);
+	request.send(body);
 };
 
 function deletePost(target) {
 	let leviUrl = 'https://time-radish.glitch.me/posts/'
+	let localUrl = 'http://localhost:8080/posts/';
 	let request = new XMLHttpRequest();
-	request.open('DELETE', leviUrl + target.className);
-	request.SetRequestHeader('Accept', 'application/json');
+	request.open('DELETE', localUrl + target.className);
+	request.setRequestHeader('Accept', 'application/json');
 	let body = JSON.stringify({
 		"id": target.className
 	});
 	request.onreadystatechange = function() {
-		if (request.readyState === XMLHttpRequest.DONE && request.Status === 200) {
+		if (request.readyState === XMLHttpRequest.DONE && request.status === 200) {
 			let deleteTag = document.querySelector('div[class="post ' + target.className + '"]');
 			deleteTag.setAttribute('style', 'animation-name: collapse; animation-duration: 1s')
 			function removeOneTag() {
@@ -157,6 +158,5 @@ function deletePost(target) {
 			setTimeout(removeOneTag, 1000);
 		};
 	};
-	request.Send(body);
+	request.send(body);
 };
-
