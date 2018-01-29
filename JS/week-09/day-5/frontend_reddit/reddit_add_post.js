@@ -1,9 +1,5 @@
 'use strict';
 
-// const express = require('express');
-// const app = express();
-// app.use(express.static('frontend_reddit'));
-
 document.getElementById('title').select();
 
 document.querySelector('a').addEventListener('click', getTitle);
@@ -35,10 +31,8 @@ function postRequest(title, postUrl) {
 		"title": title,
 		"url": postUrl
 	});
-	console.log(body);
 	request.onreadystatechange = function() {
 		if (request.readyState === XMLHttpRequest.DONE && request.status === 200) {
-			console.log(request);
 			window.location.href = 'http://localhost:8080/';
 		};
 	};
