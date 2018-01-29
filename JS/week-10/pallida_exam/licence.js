@@ -10,3 +10,19 @@ function getInput() {
   queryPlates(plateNumber, policeFilter, diplomatFilter);
 }
 
+function queryPlates(number, police, diplomat) {
+  let request = new XMLHttpRequest();
+  request.open('GET', 'http://localhost:8080/queries');
+  request.setRequestHeader('Accept', 'application/json');
+  let body = JSON.stringify({
+    plateNumber: number,
+    police: police,
+    diplomat: diplomat
+  })
+  request.onreadystatechange = function() {
+    if (request.readyState === XMLHttpRequest.DONE && request.status === 200) {
+      console.log(request.response);
+    }
+  }
+  request.send(body);
+}
