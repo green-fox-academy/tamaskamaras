@@ -28,7 +28,18 @@ app.get('/', function(req, res) {
 })
 
 app.get('/queries', function(req, res) {
-  conn.query('SELECT * FROM plates WHERE plate = ')
+  console.log(req.query);
+  console.log(req.query.plate);
+  console.log(req.query.police);
+  console.log(req.query.diplomat);
+  conn.query(`SELECT * FROM licence_plates WHERE plate LIKE "%${req.query.plate}%"`, function(err, rows) {
+    if (err) {
+      console.log(err.toString());
+      res.status(500).send('Database error');
+      return;
+    }
+    res.json(JSON.stringify(rows));
+  })
 })
 
 app.listen(port, function(){
