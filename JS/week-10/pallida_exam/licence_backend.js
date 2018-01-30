@@ -28,14 +28,15 @@ app.get('/', function(req, res) {
 })
 
 app.get('/queries', function(req, res) {
+  console.log('The validation is', validation(req.query.plate));
   let select = ``;
-  if (req.query.plate.length > 0) {
-    select = `SELECT * FROM licence_plates WHERE plate LIKE "%${req.query.plate}%"`;
-  } else if (req.query.police === 'true') {
-    select = `SELECT * FROM licence_plates WHERE plate LIKE "%RB%"`;
-  } else if (req.query.diplomat === 'true') {
-  select = `SELECT * FROM licence_plates WHERE plate LIKE "DT%"`;
-}
+  if (validation(req.query.plate)) {
+    connQuery(res, createSelect(req.query));
+  }
+})
+
+app.get('/brandquery', function(req, res) {
+  let select = `SELECT * FROM licence_plates WHERE car_brand = "${req.query.brand}"`;
   conn.query(select, function(err, rows) {
     if (err) {
       console.log(err.toString());
@@ -46,17 +47,49 @@ app.get('/queries', function(req, res) {
   })
 })
 
-app.get('/brandquery', function(req, res) {
-  conn.query(`SELECT * FROM licence_plates WHERE car_brand = "${req.query.brand}"`, function(err, rows) {
+app.listen(port, function(){
+  console.log(`App is listening on port ${port}`)
+})
+
+function validation(query) {
+  if (isAlphaNumeric(query) && query.length < 8) {
+    return true;
+  }
+  return false;
+}
+
+function isAlphaNumeric(str) {
+  let code;
+  for (let i = 0; i < str.length; i++) {
+    code = str.charCodeAt(i);
+    if (!(code > 47 && code < 58) && // numeric (0-9)
+        !(code > 64 && code < 91) && // upper alpha (A-Z)
+        !(code > 96 && code < 123)) { // lower alpha (a-z)
+      return false;
+    }
+  }
+  return true;
+};
+
+function createSelect(query) {
+  let select = ``;
+  if (query.plate.length > 0) {
+    select = `SELECT * FROM licence_plates WHERE plate LIKE "%${query.plate}%";`;
+  } else if (query.police === 'true') {
+    select = `SELECT * FROM licence_plates WHERE plate LIKE "RB%";`;
+  } else if (query.diplomat === 'true') {
+  select = `SELECT * FROM licence_plates WHERE plate LIKE "DT%";`;
+  }
+  return select;
+}
+
+function connQuery(res, select) {
+  conn.query(select, function(err, rows) {
     if (err) {
       console.log(err.toString());
-      res.status(500).send('Database error, brand query');
+      res.status(500).send('Database error');
       return;
     }
     res.json(rows);
   })
-})
-
-app.listen(port, function(){
-  console.log(`App is listening on port ${port}`)
-})
+}

@@ -63,6 +63,9 @@ function fillTable(data, table) {
     body.appendChild(rows);
     for (let i = 0; i < 5; i++) {
       let row = document.createElement('td');
+      if (fieldValues[i] === 'car_brand') {
+        row.setAttribute('style', 'cursor: pointer;')
+      }
       row.className = fieldValues[i];
       row.textContent = element[fieldValues[i]];
       rows.appendChild(row);
