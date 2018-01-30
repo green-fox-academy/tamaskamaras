@@ -2,12 +2,28 @@
 
 document.querySelector('button').addEventListener('click', getInput);
 
-function getInput() {
+let requestCounter = 0;
+
+function clearWindow() {
+  let windowContainer = document.getElementsByTagName('main');
+  let garbage = document.getElementsByTagName('table');
+  windowContainer[0].removeChild(garbage[0]);
+}
+
+function getInput(e) {
+  e.preventDefault();
   let plateNumber = document.getElementById('plate').value;
   let policeFilter = document.getElementById('police').checked;
   let diplomatFilter = document.getElementById('diplomat').checked;
-  console.log(plateNumber, policeFilter, diplomatFilter);
+  document.getElementById('plate').value = '';
+  document.getElementById('police').checked = false;
+  document.getElementById('diplomat').checked = false;
+  // document.getElementById('form').reset(); // does not work
   queryPlates(plateNumber, policeFilter, diplomatFilter);
+  if (requestCounter > 0) {
+    clearWindow();
+  }
+  requestCounter++;
 }
 
 function queryPlates(number, police, diplomat) {
@@ -16,8 +32,41 @@ function queryPlates(number, police, diplomat) {
   request.setRequestHeader('Accept', 'application/json');
   request.onreadystatechange = function() {
     if (request.readyState === XMLHttpRequest.DONE && request.status === 200) {
-      console.log(JSON.parse(request.response));
+      let rows = JSON.parse(request.response);
+      createTableHeader(rows);
     }
   }
   request.send();
+}
+
+function createTableHeader(data) {
+  const table = document.createElement('table');
+  const head = document.createElement('thead');
+  const headContainer = document.createElement('tr');
+  document.querySelector('main').appendChild(table);
+  table.appendChild(head);
+  head.appendChild(headContainer);
+  const fieldValues = ['Licence plate', 'Brand', 'Model', 'Color', 'Year'];
+  for (let i = 0; i < 5; i++) {
+    const field = document.createElement('th');
+    field.textContent = fieldValues[i];
+    headContainer.appendChild(field);
+  }
+  fillTable(data, table);
+}
+
+function fillTable(data, table) {
+  const body = document.createElement('tbody');
+  table.appendChild(body);
+  const fieldValues = ['plate', 'car_brand', 'car_model', 'color', 'year']
+  data.forEach(element => {
+    let rows = document.createElement('tr');
+    body.appendChild(rows);
+    for (let i = 0; i < 5; i++) {
+      let row = document.createElement('td');
+      row.textContent = element[fieldValues[i]];
+      rows.appendChild(row);
+    }
+    
+  });
 }

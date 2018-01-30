@@ -28,17 +28,21 @@ app.get('/', function(req, res) {
 })
 
 app.get('/queries', function(req, res) {
-  console.log(req.query);
-  console.log(req.query.plate);
-  console.log(req.query.police);
-  console.log(req.query.diplomat);
-  conn.query(`SELECT * FROM licence_plates WHERE plate LIKE "%${req.query.plate}%"`, function(err, rows) {
+  let select = ``;
+  if (req.query.plate.length > 0) {
+    select = `SELECT * FROM licence_plates WHERE plate LIKE "%${req.query.plate}%"`;
+  } else if (req.query.police === 'true') {
+    select = `SELECT * FROM licence_plates WHERE plate LIKE "%RB%"`;
+  } else if (req.query.diplomat === 'true') {
+  select = `SELECT * FROM licence_plates WHERE plate LIKE "DT%"`;
+}
+  conn.query(select, function(err, rows) {
     if (err) {
       console.log(err.toString());
       res.status(500).send('Database error');
       return;
     }
-    res.json(JSON.stringify(rows));
+    res.json(rows);
   })
 })
 
