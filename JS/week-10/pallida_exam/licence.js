@@ -5,8 +5,12 @@ document.querySelector('button').addEventListener('click', getInput);
 let requestCounter = 0;
 
 function clearWindow() {
+  document.querySelector('div').textContent = '';
   let garbage = document.querySelector('table');
-  document.querySelector('main').removeChild(garbage);
+  let main = document.querySelector('main');
+  if (garbage !== null) {
+    main.removeChild(garbage);
+  }
 }
 
 function getInput(e) {
@@ -32,7 +36,11 @@ function queryPlates(number, police, diplomat) {
   request.onreadystatechange = function() {
     if (request.readyState === XMLHttpRequest.DONE && request.status === 200) {
       let rows = JSON.parse(request.response);
-      createTableHeader(rows);
+      if (rows.result === 'error') {
+        document.querySelector('div').textContent = 'Sorry, the submitted licence plate is not valid!';
+      } else {
+        createTableHeader(rows);
+      }
     }
   }
   request.send();

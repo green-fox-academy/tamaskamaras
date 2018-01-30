@@ -28,10 +28,11 @@ app.get('/', function(req, res) {
 })
 
 app.get('/queries', function(req, res) {
-  console.log('The validation is', validation(req.query.plate));
   let select = ``;
   if (validation(req.query.plate)) {
     connQuery(res, createSelect(req.query));
+  } else {
+    res.json({ "result": "error", "message": "invalid input" });
   }
 })
 
@@ -62,7 +63,7 @@ function isAlphaNumeric(str) {
   let code;
   for (let i = 0; i < str.length; i++) {
     code = str.charCodeAt(i);
-    if (!(code > 47 && code < 58) && // numeric (0-9)
+    if ((code === 189) && !(code > 47 && code < 58) && // numeric (0-9)
         !(code > 64 && code < 91) && // upper alpha (A-Z)
         !(code > 96 && code < 123)) { // lower alpha (a-z)
       return false;
