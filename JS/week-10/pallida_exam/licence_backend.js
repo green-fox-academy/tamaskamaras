@@ -46,6 +46,17 @@ app.get('/queries', function(req, res) {
   })
 })
 
+app.get('/brandquery', function(req, res) {
+  conn.query(`SELECT * FROM licence_plates WHERE car_brand = "${req.query.brand}"`, function(err, rows) {
+    if (err) {
+      console.log(err.toString());
+      res.status(500).send('Database error, brand query');
+      return;
+    }
+    res.json(rows);
+  })
+})
+
 app.listen(port, function(){
   console.log(`App is listening on port ${port}`)
 })

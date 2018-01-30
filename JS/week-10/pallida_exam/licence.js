@@ -5,9 +5,8 @@ document.querySelector('button').addEventListener('click', getInput);
 let requestCounter = 0;
 
 function clearWindow() {
-  let windowContainer = document.getElementsByTagName('main');
-  let garbage = document.getElementsByTagName('table');
-  windowContainer[0].removeChild(garbage[0]);
+  let garbage = document.querySelector('table');
+  document.querySelector('main').removeChild(garbage);
 }
 
 function getInput(e) {
@@ -64,9 +63,30 @@ function fillTable(data, table) {
     body.appendChild(rows);
     for (let i = 0; i < 5; i++) {
       let row = document.createElement('td');
+      row.className = fieldValues[i];
       row.textContent = element[fieldValues[i]];
       rows.appendChild(row);
     }
-    
   });
+  table.addEventListener('click', checkField);
+}
+
+function checkField(e) {
+  if (e.target.className === 'car_brand') {
+    brandQuery(e.target.textContent);
+  }
+}
+
+function brandQuery(brand) {
+  let request = new XMLHttpRequest();
+  request.open('GET', `http://localhost:8080/brandquery/?brand=${brand}`);
+  request.setRequestHeader('Accept', 'application/json');
+  request.onreadystatechange = function() {
+    if (request.readyState === XMLHttpRequest.DONE && request.status === 200) {
+      let rows = JSON.parse(request.response);
+      clearWindow();
+      createTableHeader(rows);
+    }
+  }
+  request.send();
 }
