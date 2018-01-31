@@ -31,7 +31,7 @@ function getInput(e) {
 
 function queryPlates(number, police, diplomat) {
   let request = new XMLHttpRequest();
-  request.open('GET', `http://localhost:8080/queries/?plate=${number}&police=${police}&diplomat=${diplomat}`);
+  request.open('GET', `http://localhost:8080/search/?plate=${number}&police=${police}&diplomat=${diplomat}`);
   request.setRequestHeader('Accept', 'application/json');
   request.onreadystatechange = function() {
     if (request.readyState === XMLHttpRequest.DONE && request.status === 200) {
@@ -90,7 +90,7 @@ function checkField(e) {
 
 function brandQuery(brand) {
   let request = new XMLHttpRequest();
-  request.open('GET', `http://localhost:8080/brandquery/?brand=${brand}`);
+  request.open('GET', `http://localhost:8080/search/${brand}`);
   request.setRequestHeader('Accept', 'application/json');
   request.onreadystatechange = function() {
     if (request.readyState === XMLHttpRequest.DONE && request.status === 200) {

@@ -27,7 +27,7 @@ app.get('/', function(req, res) {
   res.sendFile(__dirname + '/licence.html');
 })
 
-app.get('/queries', function(req, res) {
+app.get('/search', function(req, res) {
   let select = ``;
   if (validation(req.query.plate)) {
     connQuery(res, createSelect(req.query));
@@ -36,16 +36,9 @@ app.get('/queries', function(req, res) {
   }
 })
 
-app.get('/brandquery', function(req, res) {
-  let select = `SELECT * FROM licence_plates WHERE car_brand = "${req.query.brand}"`;
-  conn.query(select, function(err, rows) {
-    if (err) {
-      console.log(err.toString());
-      res.status(500).send('Database error');
-      return;
-    }
-    res.json(rows);
-  })
+app.get('/search/:brand', function(req, res) {
+  let select = `SELECT * FROM licence_plates WHERE car_brand = "${req.params.brand}"`;
+  connQuery(res, select);
 })
 
 app.listen(port, function(){
@@ -53,10 +46,7 @@ app.listen(port, function(){
 })
 
 function validation(query) {
-  if (isAlphaNumeric(query) && query.length < 8) {
-    return true;
-  }
-  return false;
+  return (isAlphaNumeric(query) && query.length < 8) || false;
 }
 
 function isAlphaNumeric(str) {
@@ -73,13 +63,13 @@ function isAlphaNumeric(str) {
 };
 
 function createSelect(query) {
-  let select = ``;
+  let select = 'SELECT * FROM licence_plates WHERE plate LIKE "';
   if (query.plate.length > 0) {
-    select = `SELECT * FROM licence_plates WHERE plate LIKE "%${query.plate}%";`;
+    select += `%${query.plate}%";`;
   } else if (query.police === 'true') {
-    select = `SELECT * FROM licence_plates WHERE plate LIKE "RB%";`;
+    select += `RB%";`;
   } else if (query.diplomat === 'true') {
-  select = `SELECT * FROM licence_plates WHERE plate LIKE "DT%";`;
+  select += `DT%";`;
   }
   return select;
 }
