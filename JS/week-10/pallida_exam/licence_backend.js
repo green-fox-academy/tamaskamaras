@@ -29,7 +29,7 @@ app.get('/', function(req, res) {
 
 app.get('/search', function(req, res) {
   let select = ``;
-  if (validation(req.query.plate)) {
+  if (req.query.plate.match(/^[a-z0-9-]{0,7}$/i)) {
     connQuery(res, createSelect(req.query));
   } else {
     res.json({ "result": "error", "message": "invalid input" });
@@ -45,23 +45,6 @@ app.listen(port, function(){
   console.log(`App is listening on port ${port}`)
 })
 
-function validation(query) {
-  return (isAlphaNumeric(query) && query.length < 8) || false;
-}
-
-function isAlphaNumeric(str) {
-  let code;
-  for (let i = 0; i < str.length; i++) {
-    code = str.charCodeAt(i);
-    if ((code === 189) && !(code > 47 && code < 58) && // numeric (0-9)
-        !(code > 64 && code < 91) && // upper alpha (A-Z)
-        !(code > 96 && code < 123)) { // lower alpha (a-z)
-      return false;
-    }
-  }
-  return true;
-};
-
 function createSelect(query) {
   let select = 'SELECT * FROM licence_plates WHERE plate LIKE "';
   if (query.plate.length > 0) {
@@ -69,7 +52,7 @@ function createSelect(query) {
   } else if (query.police === 'true') {
     select += `RB%";`;
   } else if (query.diplomat === 'true') {
-  select += `DT%";`;
+    select += `DT%";`;
   }
   return select;
 }
@@ -84,3 +67,21 @@ function connQuery(res, select) {
     res.json(rows);
   })
 }
+
+// function validation(query) {
+//   return query.match(/^[a-z0-9-]{0,7}$/i);
+  // return (isAlphaNumeric(query) && query.length < 8);
+// }
+
+// function isAlphaNumeric(str) {
+//   let code;
+//   for (let i = 0; i < str.length; i++) {
+//     code = str.charCodeAt(i);
+//     if ((code === 189) && !(code > 47 && code < 58) && // numeric (0-9)
+//         !(code > 64 && code < 91) && // upper alpha (A-Z)
+//         !(code > 96 && code < 123)) { // lower alpha (a-z)
+//       return false;
+//     }
+//   }
+//   return true;
+// };
