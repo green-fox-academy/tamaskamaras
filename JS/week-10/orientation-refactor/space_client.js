@@ -18,51 +18,51 @@ function requestShip(planets) {
 	request.onreadystatechange = function() {
 		if (request.readyState === XMLHttpRequest.DONE) {
       let ship = JSON.parse(request.response)[0];
-      createTableHeader(planets, ship);
+      createTable(planets, ship);
 		}
 	}
 	request.send()
 }
 
-function createTableHeader(planets, ship) {
-  const table = document.createElement('table');
-  const head = document.createElement('thead');
-  const headContainer = document.createElement('tr');
-  document.querySelector('main').appendChild(table);
-  table.appendChild(head);
-  head.appendChild(headContainer);
+function createTable(planets, ship) {
+  const main = document.querySelector('main');
+  main.innerHTML = `
+  <table>
+    <thead>
+      <tr></tr>
+    </thead>
+    <tbody></tbody>
+  </table>
+  `;
   const fieldValues = ['Planet', 'Population', 'Spaceship location', 'People on ship'];
-  for (let i = 0; i < 4; i++) {
-    const field = document.createElement('th');
-    field.textContent = fieldValues[i];
-    headContainer.appendChild(field);
+  let headRow = document.querySelector('thead > tr');
+  for (let value of fieldValues) {
+    headRow.innerHTML += `<th>${value}</th>`
   }
-  fillTable(planets, ship, table);
-}
-
-function fillTable(planets, ship, table) {
   const body = document.createElement('tbody');
-  table.appendChild(body);
+  document.querySelector('table').appendChild(body);
   planets.forEach(element => {
     let rows = document.createElement('tr');
     body.appendChild(rows);
-    rows.innerHTML += `
-    <td>${element.name}</td>
-    <td>${element.population}</td>`
-    if (element.name === ship.planet) {
-      rows.innerHTML += `
-      <td>
-        <button type="submit" class="${element.id}" id="toplanet">\u2190 to planet</button>
-        <button type="submit" class="${element.id}" id="toship">to ship \u2192</button>
-      </td>
-      <td>${ship.utilization}</td>`
-    } else {
-      rows.innerHTML += `
-      <td>
-        <button type="submit" class="${element.id}">Move here</button>
-      </td>
-      <td>-</td>`
-    }
+    body.innerHTML += `
+    <tr>
+      <td>${element.name}</td>
+      <td>${element.population}</td>
+    </tr>`;
+      if (element.name === ship.planet) {
+        document.querySelector('tbody > tr:last-of-type').innerHTML += `
+        <td>
+          <button type="submit" class="${element.id}" id="toplanet">\u2190 to planet</button>
+          <button type="submit" class="${element.id}" id="toship">to ship \u2192</button>
+        </td>
+        <td>${ship.utilization}</td>`
+      } else {
+        document.querySelector('tbody > tr:last-of-type').innerHTML += `
+        <td>
+          <button type="submit" class="${element.id}">Move here</button>
+        </td>
+        <td>-</td>`
+      }
   })
   document.querySelector('table').addEventListener('click', checkButton);
 }
