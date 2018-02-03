@@ -46,38 +46,22 @@ function fillTable(planets, ship, table) {
   planets.forEach(element => {
     let rows = document.createElement('tr');
     body.appendChild(rows);
-
     rows.innerHTML += `
     <td>${element.name}</td>
     <td>${element.population}</td>`
-
-    let col3 = document.createElement('td');
-    rows.appendChild(col3);
-    let col4 = document.createElement('td');
-    rows.appendChild(col4);
     if (element.name === ship.planet) {
-      let leftArrow = document.createElement('button');
-      leftArrow.setAttribute('type', 'submit')
-      leftArrow.setAttribute('class', element.id)
-      leftArrow.setAttribute('id', 'toplanet')
-      leftArrow.textContent = '\u2190 to planet';
-
-      let rightArrow = document.createElement('button');
-      rightArrow.setAttribute('type', 'submit')
-      rightArrow.setAttribute('class', element.id)
-      rightArrow.setAttribute('id', 'toship')
-      rightArrow.textContent = 'to ship \u2192';
-
-      col3.appendChild(leftArrow);
-      col3.appendChild(rightArrow);
-      col4.textContent = ship.utilization;
+      rows.innerHTML += `
+      <td>
+        <button type="submit" class="${element.id}" id="toplanet">\u2190 to planet</button>
+        <button type="submit" class="${element.id}" id="toship">to ship \u2192</button>
+      </td>
+      <td>${ship.utilization}</td>`
     } else {
-      let button = document.createElement('button');
-      button.setAttribute('type', 'submit')
-      button.setAttribute('class', element.id)
-      button.textContent = 'Move here';
-      col3.appendChild(button);
-      col4.textContent = '-';
+      rows.innerHTML += `
+      <td>
+        <button type="submit" class="${element.id}">Move here</button>
+      </td>
+      <td>-</td>`
     }
   })
   document.querySelector('table').addEventListener('click', checkButton);
