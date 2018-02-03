@@ -91,6 +91,7 @@ function checkButton(event) {
   } else if (event.target.id === 'toplanet') {
     toPlanet(event.target.className);
   } else if (event.target.id === 'toship') {
+    console.log('event.target.id:', event.target.id)
     toShip(event.target.className);
   }
 }
@@ -137,6 +138,7 @@ function toShip(id) {
   console.log(id);
   let request = new XMLHttpRequest();
   request.open('POST', `http://localhost:8080/toship/?planet_id=${id}`);
+  console.log(`http://localhost:8080/toship/?planet_id=${id}`),
   request.setRequestHeader('Accept', 'application/json');
   request.onreadystatechange = function() {
     if (request.readyState === XMLHttpRequest.DONE && request.status === 200) {

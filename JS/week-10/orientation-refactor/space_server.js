@@ -54,67 +54,41 @@ app.post('/movehere', function(req, res) {
   })
 })
 
-app.post('/toship', function(req, res) {
-  let select = `SELECT max_capacity, utilization FROM spaceship WHERE id = ${req.query.planet_id};`;
-  conn.query(select, function(err, rows) {
-    if (err) {
-      console.log(err.toString());
-      res.status(500).send('Database error');
+app.post('/toship', function(request, response) {
+  let select = `SELECT max_capacity, utilization, population FROM spaceship, planet 
+  WHERE spaceship.id = 1 AND planet.id = ${request.query.planet_id};`;
+  conn.query(select, function(selectError, selectRows) {
+    if (selectError) {
+      console.log(selectError.toString());
+      response.status(500).send('Database error');
       return;
     }
-    // res.json(rows);
-    console.log(rows)
-    queryPlanet(res, rows, req.query.planet_id);
+    let update = validationToShip(selectRows, request.query.planet_id);
+    console.log(update);
+    conn.query(update, function(updateError, rows) {
+      if (updateError) {
+        console.log(updateError.toString());
+        response.status(500).send('Database error, update');
+        return;
+      };
+      response.json({message: 'OK',});
+    })
   })
 })
 
-function queryPlanet(res, spaceship, planet_id) {
-  let select = `SELECT population FROM planet WHERE id = ${planet_id};`
-  conn.query(select, function(err, rows) {
-    if (err) {
-      console.log(err.toString());
-      res.status(500).send('Database error');
-      return;
-    }
-    // res.json(rows);
-    console.log(spaceship);
-    let population = parseInt(rows[0].population);
-    let shipCapacity = parseInt(spaceship[0].max_capacity);
-    let shipUtilization = parseInt(spaceship[0].utilization);
-    let diff = shipCapacity - shipUtilization;
-    if (diff > 0) {
-      changePassengersNum(res, diff);
-      changePopulationNum(res, diff, planet_id);
-    }
-  })
+function validationToShip(rows, planet_id) {
+  let update = `UPDATE spaceship, planet SET spaceship.utilization = spaceship.utilization + `;
+  let freeSeats = rows[0].max_capacity - rows[0].utilization;
+  if (freeSeats > 0 && rows[0].population > freeSeats) {
+    update += `${freeSeats}, planet.population = planet.population - ${freeSeats} WHERE spaceship.id = 1 AND planet.id = ${planet_id};`;
+    return update;
+    } else if (freeSeats > 0 && rows[0].population < freeSeats) {
+    update += `planet.population, planet.population = 0 WHERE spaceship.id = 1 AND planet.id = ${planet_id};`;
+    return update;
+  }
 }
 
-function changePassengersNum(res, diff) {
-  console.log(diff);
-  let select = `UPDATE spaceship SET utilization = utilization + ${diff} WHERE id = 1`;
-  conn.query(select, function(err, rows) {
-    if (err) {
-      console.log(err.toString());
-      res.status(500).send('Database error, post');
-      return;
-    };
-    res.json({message: 'OK',});
-  })
 
-}
-
-function changePopulationNum(res, diff, planet_id) {
-  console.log(diff);
-  let select = `UPDATE planet SET population = population - ${diff} WHERE id = ${planet_id}`;
-  conn.query(select, function(err, rows) {
-    if (err) {
-      console.log(err.toString());
-      res.status(500).send('Database error, post');
-      return;
-    };
-    res.json({message: 'OK',});
-  })
-}
 
 function connQuery(res, select) {
   conn.query(select, function(err, rows) {
