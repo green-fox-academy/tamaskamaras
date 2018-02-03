@@ -42,8 +42,8 @@ app.get('/ship', function(req, res) {
 })
 
 app.post('/movehere', function(req, res) {
-  let select2 = `UPDATE spaceship SET planet = 
-  (SELECT name FROM planet WHERE id = ${req.query.planet_id}) WHERE id = "1"`;
+  let select2 = `UPDATE spaceship SET planet =
+  (SELECT name FROM planet WHERE id = ${req.query.planet_id}) WHERE id = 1;`;
   conn.query(select2, function(err, rows) {
     if (err) {
       console.log(err.toString());
@@ -54,7 +54,7 @@ app.post('/movehere', function(req, res) {
   })
 })
 
-app.post('/toship', function(request, response) {
+app.put('/toship', function(request, response) {
   let select = `SELECT max_capacity, utilization, population FROM spaceship, planet 
   WHERE spaceship.id = 1 AND planet.id = ${request.query.planet_id};`;
   conn.query(select, function(selectError, selectRows) {
@@ -64,7 +64,6 @@ app.post('/toship', function(request, response) {
       return;
     }
     let update = validationToShip(selectRows, request.query.planet_id);
-    console.log(update);
     conn.query(update, function(updateError, rows) {
       if (updateError) {
         console.log(updateError.toString());
@@ -88,15 +87,34 @@ function validationToShip(rows, planet_id) {
   }
 }
 
+app.put('/toplanet', function(request, response) {
+  let update = `UPDATE planet SET planet.population = planet.population +
+    (SELECT utilization FROM spaceship WHERE id = 1)
+      WHERE planet.id = ${request.query.planet_id};`
+  conn.query(update, function(err, rows) {
+    if (err) {
+      console.log(err.toString());
+      response.status(500).send('Database error, post');
+      return;
+    };
+  })
+  conn.query(`UPDATE spaceship SET utilization = 0 WHERE id = 1;`, function(shipError, shipRows) {
+    if (shipError) {
+      console.log(shipError.toString());
+      response.status(500).send('Database error, post');
+      return;
+    };
+    response.json({message: 'OK',});
+  })
+})
 
-
-function connQuery(res, select) {
+function connQuery(response, select) {
   conn.query(select, function(err, rows) {
     if (err) {
       console.log(err.toString());
-      res.status(500).send('Database error');
+      response.status(500).send('Database error');
       return;
     }
-    res.json(rows);
+    response.json(rows);
   })
 }

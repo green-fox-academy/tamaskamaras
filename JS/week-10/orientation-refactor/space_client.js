@@ -6,7 +6,6 @@ function requestPlanets() {
 	request.onreadystatechange = function() {
 		if (request.readyState === XMLHttpRequest.DONE) {
       let planets = JSON.parse(request.response);
-      console.log(planets);
       requestShip(planets);
 		}
 	}
@@ -47,12 +46,11 @@ function fillTable(planets, ship, table) {
   planets.forEach(element => {
     let rows = document.createElement('tr');
     body.appendChild(rows);
-    let col1 = document.createElement('td');
-    col1.textContent = element.name;
-    rows.appendChild(col1);
-    let col2 = document.createElement('td');
-    col2.textContent = element.population;
-    rows.appendChild(col2);
+
+    rows.innerHTML += `
+    <td>${element.name}</td>
+    <td>${element.population}</td>`
+
     let col3 = document.createElement('td');
     rows.appendChild(col3);
     let col4 = document.createElement('td');
@@ -91,15 +89,8 @@ function checkButton(event) {
   } else if (event.target.id === 'toplanet') {
     toPlanet(event.target.className);
   } else if (event.target.id === 'toship') {
-    console.log('event.target.id:', event.target.id)
     toShip(event.target.className);
   }
-}
-
-function clearWindow() {
-  let garbage = document.querySelector('table');
-  let main = document.querySelector('main');
-  main.removeChild(garbage);
 }
 
 function moveShip(id) {
@@ -109,25 +100,22 @@ function moveShip(id) {
   request.onreadystatechange = function() {
     if (request.readyState === XMLHttpRequest.DONE && request.status === 200) {
       let rows = JSON.parse(request.response);
-      console.log(rows);
-      clearWindow();
+      document.querySelector('main').textContent = '';
       requestPlanets();
     }
   }
   request.send();
-  
 }
 
 function toPlanet(id) {
   console.log(id);
   let request = new XMLHttpRequest();
-  request.open('POST', `http://localhost:8080/toplanet/?planet_id=${id}`);
+  request.open('PUT', `http://localhost:8080/toplanet/?planet_id=${id}`);
   request.setRequestHeader('Accept', 'application/json');
   request.onreadystatechange = function() {
     if (request.readyState === XMLHttpRequest.DONE && request.status === 200) {
       let rows = JSON.parse(request.response);
-      console.log(rows);
-      clearWindow();
+      document.querySelector('main').textContent = '';
       requestPlanets();
     }
   }
@@ -135,16 +123,13 @@ function toPlanet(id) {
 }
 
 function toShip(id) {
-  console.log(id);
   let request = new XMLHttpRequest();
-  request.open('POST', `http://localhost:8080/toship/?planet_id=${id}`);
-  console.log(`http://localhost:8080/toship/?planet_id=${id}`),
+  request.open('PUT', `http://localhost:8080/toship/?planet_id=${id}`);
   request.setRequestHeader('Accept', 'application/json');
   request.onreadystatechange = function() {
     if (request.readyState === XMLHttpRequest.DONE && request.status === 200) {
       let rows = JSON.parse(request.response);
-      console.log(rows);
-      clearWindow();
+      document.querySelector('main').textContent = '';
       requestPlanets();
     }
   }
