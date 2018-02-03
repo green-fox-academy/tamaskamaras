@@ -69,46 +69,17 @@ function fillTable(planets, ship, table) {
 
 function checkButton(event) {
   if (event.target.textContent === 'Move here') {
-    moveShip(event.target.className);
+    putRequest(event.target.className, 'movehere');
   } else if (event.target.id === 'toplanet') {
-    toPlanet(event.target.className);
+    putRequest(event.target.className, 'toplanet');
   } else if (event.target.id === 'toship') {
-    toShip(event.target.className);
+    putRequest(event.target.className, 'toship');
   }
 }
 
-function moveShip(id) {
+function putRequest(id, endpoint) {
   let request = new XMLHttpRequest();
-  request.open('POST', `http://localhost:8080/movehere/?planet_id=${id}`);
-  request.setRequestHeader('Accept', 'application/json');
-  request.onreadystatechange = function() {
-    if (request.readyState === XMLHttpRequest.DONE && request.status === 200) {
-      let rows = JSON.parse(request.response);
-      document.querySelector('main').textContent = '';
-      requestPlanets();
-    }
-  }
-  request.send();
-}
-
-function toPlanet(id) {
-  console.log(id);
-  let request = new XMLHttpRequest();
-  request.open('PUT', `http://localhost:8080/toplanet/?planet_id=${id}`);
-  request.setRequestHeader('Accept', 'application/json');
-  request.onreadystatechange = function() {
-    if (request.readyState === XMLHttpRequest.DONE && request.status === 200) {
-      let rows = JSON.parse(request.response);
-      document.querySelector('main').textContent = '';
-      requestPlanets();
-    }
-  }
-  request.send();
-}
-
-function toShip(id) {
-  let request = new XMLHttpRequest();
-  request.open('PUT', `http://localhost:8080/toship/?planet_id=${id}`);
+  request.open('PUT', `http://localhost:8080/${endpoint}/?planet_id=${id}`);
   request.setRequestHeader('Accept', 'application/json');
   request.onreadystatechange = function() {
     if (request.readyState === XMLHttpRequest.DONE && request.status === 200) {

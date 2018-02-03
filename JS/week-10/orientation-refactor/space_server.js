@@ -41,10 +41,10 @@ app.get('/ship', function(req, res) {
   connQuery(res, select);
 })
 
-app.post('/movehere', function(req, res) {
-  let select2 = `UPDATE spaceship SET planet =
-  (SELECT name FROM planet WHERE id = ${req.query.planet_id}) WHERE id = 1;`;
-  conn.query(select2, function(err, rows) {
+app.put('/movehere', function(req, res) {
+  let select = `UPDATE spaceship SET planet =
+    (SELECT name FROM planet WHERE id = ${req.query.planet_id}) WHERE id = 1;`;
+  conn.query(select, function(err, rows) {
     if (err) {
       console.log(err.toString());
       res.status(500).send('Database error, post');
@@ -55,8 +55,8 @@ app.post('/movehere', function(req, res) {
 })
 
 app.put('/toship', function(request, response) {
-  let select = `SELECT max_capacity, utilization, population FROM spaceship, planet 
-  WHERE spaceship.id = 1 AND planet.id = ${request.query.planet_id};`;
+  let select = `SELECT max_capacity, utilization, population FROM spaceship, planet
+    WHERE spaceship.id = 1 AND planet.id = ${request.query.planet_id};`;
   conn.query(select, function(selectError, selectRows) {
     if (selectError) {
       console.log(selectError.toString());
@@ -79,7 +79,8 @@ function validationToShip(rows, planet_id) {
   let update = `UPDATE spaceship, planet SET spaceship.utilization = spaceship.utilization + `;
   let freeSeats = rows[0].max_capacity - rows[0].utilization;
   if (freeSeats > 0 && rows[0].population > freeSeats) {
-    update += `${freeSeats}, planet.population = planet.population - ${freeSeats} WHERE spaceship.id = 1 AND planet.id = ${planet_id};`;
+    update += `${freeSeats}, planet.population = planet.population - ${freeSeats}
+      WHERE spaceship.id = 1 AND planet.id = ${planet_id};`;
     return update;
     } else if (freeSeats > 0 && rows[0].population < freeSeats) {
     update += `planet.population, planet.population = 0 WHERE spaceship.id = 1 AND planet.id = ${planet_id};`;
