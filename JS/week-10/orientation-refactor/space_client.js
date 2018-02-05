@@ -36,9 +36,9 @@ function createTable(planets, ship) {
   `;
   const fieldValues = ['Planet', 'Population', 'Spaceship location', 'People on ship'];
   let headRow = document.querySelector('thead > tr');
-  for (let value of fieldValues) {
+  fieldValues.forEach(value => {
     headRow.innerHTML += `<th>${value}</th>`
-  }
+  }) 
   const body = document.createElement('tbody');
   document.querySelector('table').appendChild(body);
   planets.forEach(element => {
