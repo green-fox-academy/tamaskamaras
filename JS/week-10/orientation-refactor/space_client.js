@@ -4,7 +4,8 @@ function requestPlanets() {
 	let request = new XMLHttpRequest();
 	request.open('GET', 'http://localhost:8080/planets');
 	request.onreadystatechange = function() {
-		if (request.readyState === XMLHttpRequest.DONE) {
+		if (request.readyState === XMLHttpRequest.DONE && request.status === 200) {
+      console.log(request);
       let planets = JSON.parse(request.response);
       requestShip(planets);
 		}
@@ -16,7 +17,7 @@ function requestShip(planets) {
 	let request = new XMLHttpRequest();
 	request.open('GET', 'http://localhost:8080/ship');
 	request.onreadystatechange = function() {
-		if (request.readyState === XMLHttpRequest.DONE) {
+		if (request.readyState === XMLHttpRequest.DONE && request.status === 200) {
       let ship = JSON.parse(request.response)[0];
       createTable(planets, ship);
 		}
