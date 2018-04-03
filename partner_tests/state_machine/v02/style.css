@@ -1,0 +1,30 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+#container {
+  display: inline-flex;
+}
+
+.box {
+  width: 70px;
+  height: 70px;
+  margin: 100px;
+  padding: 30px;
+  border: black solid 1px;
+  border-radius: 70px;
+  text-align: center;
+}
+
+button {
+  margin: 0 0 0 100px;
+}
+
+p {
+  margin: 25px 100px;
+}
+
+.state {
+  background-color: aqua;
+}
