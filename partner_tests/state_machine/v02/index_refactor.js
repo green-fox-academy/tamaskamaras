@@ -30,20 +30,20 @@ function Child(name) {
   };
 }
 
-function giveSnack (state, child) {
+function giveSnack (child, state) {
   let toChild = child || mock;
   let position = state || toChild.state;
-  (!child) ? toChild.snacks = 0 : null;
+  (state) ? toChild.snacks = 0 : null;
   if (position === 'playing' || position === 'eating') {
     toChild.snacks++;
   }
   return toChild.snacks;
 }
 
-function consumeSnack (state, child) {
+function consumeSnack (child, state) {
   let toChild = child || mock;
   let position = state || toChild.state;
-  (!child) ? toChild.snacks = 1 : null;
+  (state) ? toChild.snacks = 1 : null;
   if (position === 'eating') {
     toChild.snacks = 0;
   }
@@ -58,11 +58,13 @@ let pete = new Child('Pete');
 
 function displayChild(child) {}
 
-// console.log(pete.state);
 // giveSnack(pete);
 // giveSnack(pete);
 // giveSnack(pete);
 // giveSnack(pete);
+// console.log(pete.snacks);
+// pete.callToEat();
+// pete.callToPlay();
 // console.log(pete.snacks);
 
 

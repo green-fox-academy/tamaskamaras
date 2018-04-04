@@ -86,7 +86,7 @@ test('give snack', (t) => {
 });
 
 test('give snack in hiding', (t) => {
-  let actual = app.giveSnack('hiding');
+  let actual = app.giveSnack(pete, 'hiding');
   let expected = 0;
 
   t.equal(actual, expected);
@@ -94,7 +94,7 @@ test('give snack in hiding', (t) => {
 });
 
 test('consume snack in eating', (t) => {
-  let actual = app.consumeSnack('eating');
+  let actual = app.consumeSnack(pete, 'eating');
   let expected = 0;
 
   t.equal(actual, expected);
@@ -102,7 +102,7 @@ test('consume snack in eating', (t) => {
 });
 
 test('consume snack in hiding', (t) => {
-  let actual = app.consumeSnack('hiding');
+  let actual = app.consumeSnack(pete, 'hiding');
   let expected = 1;
 
   t.equal(actual, expected);
