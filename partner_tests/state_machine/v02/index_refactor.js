@@ -45,7 +45,7 @@ function consumeSnacks (child, state) {
   let toChild = child || mock;
   let position = state || toChild.state;
   (state) ? toChild.snacks = 1 : null;
-  if (position === 'eating') {
+  if (position === 'eating' && toChild.snacks > 0) {
     toChild.snackConsumption += toChild.snacks;
     toChild.snacks = 0;
     raiseMood(toChild);
@@ -107,5 +107,3 @@ module.exports = {
   consumeSnacks,
   raiseMood
 }
-
-
