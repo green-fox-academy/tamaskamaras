@@ -74,7 +74,27 @@ function raiseMood (child, consumption) {
 let mock = new Child('Mock');
 let pete = new Child('Pete');
 
-function displayChild(child) {}
+document.querySelector('.buttons').addEventListener('click', checkButton);
+
+function changeBackground(child, callback) {
+  document.querySelector(`.${child.state}`).classList.remove('state');
+  callback()
+	document.querySelector(`.${child.state}`).classList.add('state');
+}
+
+function checkButton(event) {
+  if (event.target.textContent === 'call to kindergarten') {
+    changeBackground(pete, pete.callToKindergarten);
+  } else if (event.target.textContent === 'call to play') {
+    changeBackground(pete, pete.callToPlay);
+  } else if (event.target.textContent === 'call to eat') {
+    changeBackground(pete, pete.callToEat);
+  } else if (event.target.textContent === 'GIVE SNACK!') {
+    console.log(event.target.textContent);
+  }
+}
+
+
 
 module.exports = {
   Child,
@@ -82,3 +102,5 @@ module.exports = {
   consumeSnacks,
   raiseMood
 }
+
+
