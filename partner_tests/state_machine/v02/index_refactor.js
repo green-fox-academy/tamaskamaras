@@ -9,11 +9,12 @@ function Child(name) {
   this.callToKindergarten = (state) => {
     let from = state || this.state;
     this.state = 'hiding';
+    this.mood = 0;
 		return `${this.name}'s state transited from "${from}" to "${this.state}".`;
   };
   this.callToPlay = (state) => {
     let from = state || this.state;
-    consumeSnack(this);
+    consumeSnacks(this);
     if (from !== 'playing') {
       this.state = 'playing';
       return `${this.name}'s state transited from "${from}" to "${this.state}".`;    
@@ -40,17 +41,34 @@ function giveSnack (child, state) {
   return toChild.snacks;
 }
 
-function consumeSnack (child, state) {
+function consumeSnacks (child, state) {
   let toChild = child || mock;
   let position = state || toChild.state;
   (state) ? toChild.snacks = 1 : null;
   if (position === 'eating') {
+    toChild.snackConsumption += toChild.snacks;
     toChild.snacks = 0;
+    raiseMood(toChild);
   }
   return toChild.snacks;
 }
 
-function raiseMood (child) {
+function raiseMood (child, consumption) {
+  let toChild = child || mock;
+  let snackConsumption = consumption || toChild.snackConsumption;
+  (consumption) ? toChild.mood = 0 : null;
+  if (snackConsumption > 0) {
+      if (snackConsumption % 15 === 0) {
+      toChild.mood += 8;
+    } else if (snackConsumption % 5 === 0) {
+      toChild.mood += 4;
+    } else if (snackConsumption % 3 === 0) {
+      toChild.mood += 2;
+    } else {
+      toChild.mood++;
+    }
+  }
+  return toChild.mood;
 }
 
 let mock = new Child('Mock');
@@ -58,25 +76,9 @@ let pete = new Child('Pete');
 
 function displayChild(child) {}
 
-// giveSnack(pete);
-// giveSnack(pete);
-// giveSnack(pete);
-// giveSnack(pete);
-// console.log(pete.snacks);
-// pete.callToEat();
-// pete.callToPlay();
-// console.log(pete.snacks);
-
-
-// console.log(giveSnack());
-// console.log(pete.callToPlay('hiding'));
-// console.log(pete.state);
-// console.log(pete.callToEat());
-// console.log(pete.state);
-
 module.exports = {
   Child,
   giveSnack,
-  consumeSnack,
+  consumeSnacks,
   raiseMood
 }

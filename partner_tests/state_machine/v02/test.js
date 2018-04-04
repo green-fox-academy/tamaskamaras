@@ -93,8 +93,16 @@ test('give snack in hiding', (t) => {
   t.end();
 });
 
+test('consume snack', (t) => {
+  let actual = app.consumeSnacks();
+  let expected = 1;
+
+  t.equal(actual, expected);
+  t.end();
+});
+
 test('consume snack in eating', (t) => {
-  let actual = app.consumeSnack(pete, 'eating');
+  let actual = app.consumeSnacks(pete, 'eating');
   let expected = 0;
 
   t.equal(actual, expected);
@@ -102,8 +110,48 @@ test('consume snack in eating', (t) => {
 });
 
 test('consume snack in hiding', (t) => {
-  let actual = app.consumeSnack(pete, 'hiding');
+  let actual = app.consumeSnacks(pete, 'hiding');
   let expected = 1;
+
+  t.equal(actual, expected);
+  t.end();
+});
+
+test('raise mood', (t) => {
+  let actual = app.raiseMood();
+  let expected = 0;
+
+  t.equal(actual, expected);
+  t.end();
+});
+
+test('raise mood at every snack', (t) => {
+  let actual = app.raiseMood(pete, 1);
+  let expected = 1;
+
+  t.equal(actual, expected);
+  t.end();
+});
+
+test('raise mood at every 3. snacks', (t) => {
+  let actual = app.raiseMood(pete, 3);
+  let expected = 2;
+
+  t.equal(actual, expected);
+  t.end();
+});
+
+test('raise mood at every 5. snacks', (t) => {
+  let actual = app.raiseMood(pete, 5);
+  let expected = 4;
+
+  t.equal(actual, expected);
+  t.end();
+});
+
+test('raise mood at every 15. snacks', (t) => {
+  let actual = app.raiseMood(pete, 15);
+  let expected = 8;
 
   t.equal(actual, expected);
   t.end();
