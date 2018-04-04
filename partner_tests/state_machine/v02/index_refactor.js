@@ -76,9 +76,15 @@ let pete = new Child('Pete');
 
 document.querySelector('.buttons').addEventListener('click', checkButton);
 
+function displayText(string) {
+  document.querySelector('p[id="message"]').textContent = string;
+  document.querySelector('p[id="mood"]').textContent = `Pete's mood: ${pete.mood}`;
+  document.querySelector('p[id="snacks"]').textContent = `Pete's snacks: ${pete.snacks}`;
+}
+
 function changeBackground(child, callback) {
   document.querySelector(`.${child.state}`).classList.remove('state');
-  callback()
+  displayText(callback());
 	document.querySelector(`.${child.state}`).classList.add('state');
 }
 
@@ -90,11 +96,10 @@ function checkButton(event) {
   } else if (event.target.textContent === 'call to eat') {
     changeBackground(pete, pete.callToEat);
   } else if (event.target.textContent === 'GIVE SNACK!') {
-    console.log(event.target.textContent);
+    giveSnack(pete);
+  	document.querySelector('p[id="snacks"]').textContent = `Pete's snacks: ${pete.snacks}`;
   }
 }
-
-
 
 module.exports = {
   Child,
