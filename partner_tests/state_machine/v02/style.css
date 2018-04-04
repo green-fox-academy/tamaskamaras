@@ -10,7 +10,7 @@
 .box {
   width: 70px;
   height: 70px;
-  margin: 100px;
+  margin: 100px 100px 50px;
   padding: 30px;
   border: black solid 1px;
   border-radius: 70px;
