@@ -69,15 +69,17 @@ class Traversal {
     for (let key in tree) {
       if (typeof tree[key] !== 'number') {
         this.postOrderTraversal(tree[key]);
-      } else if (tree.children && tree.children.length < 1) {
-        this.valuesPostOrder.push(tree['value']);
       }
     }
-    return this.valuesPostOrder;
+    if (tree['value']) {
+      this.valuesPostOrder.push(tree['value']);
+    }
   }
 }
 
 let myTraversal = new Traversal;
 
-console.log(myTraversal.preOrderTraversal(tree));
-console.log(myTraversal.postOrderTraversal(tree));
+myTraversal.preOrderTraversal(tree);
+myTraversal.postOrderTraversal(tree);
+console.log(myTraversal.valuesPreOrder);
+console.log(myTraversal.valuesPostOrder);
