@@ -75,11 +75,16 @@ class ArrayScanner {
   }
 
   allNumbersAreDividableBy3Refactor() {
-    let result = [];
+    let result = false;
     for (let i = 0; i < this.array.length; i++) {
-      (this.array[i] % 3 === 0) ? result.push(true) : 0;
+      result = result || (this.array[i] % 3 === 0);
+      // if (this.array[i] % 3 === 0) {
+      //   result = result && true;
+      // } else {
+      //   result = result && false;
+      // }
     }
-    return (result.length === this.array.length);
+    return result;
   }
 
   //
@@ -91,6 +96,7 @@ class ArrayScanner {
     let radius = 5;
     let result = {};
     for (let i = 0; i < this.array.length; i++) {
+      
       if (center - radius <= this.array[i] && center + radius >= this.array[i]) {
         (result[this.array[i]] += 1) || (result[this.array[i]] = 1);
       }
@@ -99,6 +105,7 @@ class ArrayScanner {
   }
 }
 
-let myArrayScanner = new ArrayScanner([1, 2, 3, 4, 4, 4, 5, 6, 7, 8, 43, 8, 9, 10, 11, 25]);
+let myArrayScanner = new ArrayScanner([1, 2, 3, 4, 4, 4, 5, 6, 7, 8, 43, 8, 9, 10, 11, 25, 3]);
 
-console.log(myArrayScanner.neighborhoodOfPoint(5));
+// console.log(myArrayScanner.neighborhoodOfPoint(5));
+console.log(myArrayScanner.allNumbersAreDividableBy3Refactor());
