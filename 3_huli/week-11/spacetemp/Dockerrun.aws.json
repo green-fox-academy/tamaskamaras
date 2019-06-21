@@ -1,0 +1,11 @@
+{
+  "AWSEBDockerrunVersion": "1",
+  "Image":{       
+    "Name": "tamaskamaras/spacerds"     
+  },
+    "Ports": [       {         
+      "ContainerPort": "8080",
+      "hostPort": "80"
+    }
+  ]
+}

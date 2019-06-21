@@ -1,0 +1,21 @@
+{     
+
+  "AWSEBDockerrunVersion": "1",          
+
+  "Image":{       
+
+    "Name": "tamaskamaras/get-started:part1"     
+
+  },     
+
+    "Ports": [       {         
+
+      "ContainerPort": "8080",
+
+      "hostPort": "80"
+
+    }     
+
+  ]   
+
+}
